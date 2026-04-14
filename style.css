@@ -1,0 +1,506 @@
+body {
+    margin: 0;
+    margin-top: 60px;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* TOP BAR */
+.topbar {
+    background-color: #258cfb;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 60px;
+    padding: 0 20px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.search-bar {
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.logo:hover {
+    color: white;
+}
+
+.right-section button {
+    margin-left: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.icon-btn i {
+    color: white;
+    font-size: 20px;
+}
+
+.icon-btn:hover i {
+    color: orange;
+}
+
+/* SIDE MENU */
+.side-menu {
+    position: fixed;
+    left: -200px;
+    top: 60px;
+    bottom: 0;
+    width: 200px;
+    height: calc(100vh - 60px);
+    background: #1365bb;
+    transition: left 0.3;
+    z-index: 999;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.side-menu a:hover {
+    background: orange;
+}
+
+/* SLOGAN */
+.slogan {
+    height: 300px;
+    background: url('imgs/gymbkg.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* DEALS */
+.deals {
+    padding: 20px;
+    text-align: center;
+}
+
+/* CAROUSEL CONTAINER */
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: visible;
+    max-width: 900px;  
+    margin: 0 auto;    
+}
+
+/* PRODUCT ROW */
+.products {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+/* PRODUCT CARD */
+.product {
+    min-width: calc(25% - 15px);
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* IMAGE */
+.product img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* PRICE */
+.price {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: red;
+    margin-right: 5px;
+}
+
+/* ARROWS */
+.arrow {
+    background: #258cfb;
+    color: white;
+    border: none;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.arrow.left {
+    left: -30px;
+}
+
+.arrow.right {
+    right: -30px;
+}
+
+.arrow:hover {
+    background: #1365bb;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: red;
+}
+
+.equipment-bg {
+    background: url('imgs/gymbkg.jpg') center/cover no-repeat;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* DARK OVERLAY */
+.equipment-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+/* keep content above overlay */
+.equipment {
+    position: relative;
+    color: white;
+    padding: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.product {
+    background: white;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.product img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* IMAGE WRAPPER */
+.product-img {
+    position: relative;
+}
+
+/* ICON BASE */
+.fav-icon,
+.cart-icon {
+    position: absolute;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+/* HEART (top right) */
+.fav-icon {
+    top: 10px;
+    right: 10px;
+    color: white;
+    background: rgba(0,0,0,0.5);
+}
+
+/* CART (bottom right) */
+.cart-icon {
+    bottom: 10px;
+    right: 10px;
+    color: white;
+    background: rgba(0,0,0,0.5);
+}
+
+/* SHOW ON HOVER */
+.product:hover .fav-icon,
+.product:hover .cart-icon {
+    opacity: 1;
+}
+
+/* ACTIVE STATES */
+.fav-icon.active {
+    color: red;
+}
+
+.cart-icon.active {
+    background: #258cfb;
+    color: white;
+}
+/* BACKGROUND */
+.about-bg {
+    background: url('imgs/gymbkg.jpg') center/cover no-repeat;
+    min-height: 100vh;
+    position: relative;
+}
+
+.about-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+}
+
+/* CONTENT */
+.about {
+    position: relative;
+    color: white;
+    max-width: 800px;
+    margin: auto;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* HEADINGS */
+.about h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* TEXT */
+.about p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* LIST */
+.about ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about li {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+/* BACKGROUND */
+.contact-bg {
+    background: url('imgs/gymbkg.jpg') center/cover no-repeat;
+    min-height: 100vh;
+    position: relative;
+}
+
+.contact-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+}
+
+/* LAYOUT */
+.contact-container {
+    position: relative;
+    display: flex;
+    height: calc(100vh - 60px);
+    color: white;
+}
+
+/* LEFT SIDE */
+.contact-left {
+    flex: 1;
+    padding: 50px;
+}
+
+.contact-left h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.contact-links {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+.contact-links a:hover {
+    color: orange;
+}
+
+.contact-right {
+    flex: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px;
+}
+
+.contact-right iframe {
+    width: 80%;
+    height: 80%;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/* BACKGROUND (same as homepage but dimmed) */
+.product-page-body {
+    background: url("imgs/gymbkg.jpg") center/cover no-repeat fixed;
+}
+
+/* CENTER EVERYTHING */
+.product-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+/* MAIN WHITE BOX */
+.product-box {
+    background: white;
+    display: flex;
+    gap: 40px;
+    padding: 30px;
+    border-radius: 15px;
+    width: 900px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* LEFT SIDE */
+.left-side {
+    flex: 1;
+    text-align: center;
+}
+
+.left-side h1 {
+    margin-bottom: 15px;
+}
+
+.left-side img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.left-side .price {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* RIGHT SIDE */
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* DESCRIPTION BOX */
+.desc-box {
+    background: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+}
+
+/* ADD TO CART BUTTON */
+.add-cart {
+    background: #258cfb;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* HOVER EFFECT */
+.add-cart:hover {
+    background: #1f6ed4;
+}
+
+.size-container {
+    margin-top: 15px;
+    color: black;
+}
+
+.size-container select {
+    margin-top: 5px;
+    padding: 8px;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}

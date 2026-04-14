@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product - Pump Nation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="product-page-body">
+
+<!-- TOP BAR -->
+<header class="topbar">
+    <div class="left-section">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
+
+    <a href="homepg.html" class="logo">Pump Nation</a>
+
+    <div class="right-section">
+        <button class="icon-btn"><i class="fa-regular fa-heart"></i></button>
+        <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+    </div>
+</header>
+
+<!-- SIDE MENU -->
+<nav id="sideMenu" class="side-menu">
+    <a href="equipment.html">Equipment</a>
+    <a href="gear.html">Gear</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<div class="product-wrapper">
+
+    <div class="product-box">
+
+        <!-- LEFT SIDE -->
+        <div class="left-side">
+
+            <h1 id="productName"></h1>
+
+            <img id="productImg">
+
+            <p class="price" id="productPrice"></p>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right-side">
+
+            <div class="desc-box">
+                <p id="productDesc"></p>
+            </div>
+
+            <div id="sizeContainer" class="size-container" style="display: none;">
+                <label>Select Size:</label>
+                <select id="sizeSelect">
+                    <option value="">Choose size</option>
+                </select>
+            </div>
+
+            <button class="add-cart">
+                Add to Cart <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
