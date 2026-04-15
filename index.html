@@ -2,17 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PumpNation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-<!--TOPBAR-->
+<!--BAR&MENU-->
 <header class="topbar">
     <div class="left-section">
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <input type="text" placeholder="Search..." class="search-bar">
+        <button class="menu-icon" onclick="toggleMenu()" aria-label="Open menu" aria-controls="sideMenu" aria-expanded="false" type="button">☰</button>
+
+        <div class="search-wrap">
+            <label for="globalSearch" class="sr-only">Search products</label>
+            <input
+                type="text"
+                id="globalSearch"
+                placeholder="Search..."
+                class="search-bar"
+                onkeydown="handleSearchKey(event)"
+                oninput="handleLiveSearch(event)"
+            >
+        </div>
     </div>
 
     <a href="index.html" class="logo">
@@ -20,138 +35,170 @@
     </a>
 
     <div class="right-section">
-        <a href="favourites.html" class="icon-btn">
-            <i class="fa-regular fa-heart"></i>
+        <a href="favourites.html" class="icon-btn" aria-label="Open favourites">
+            <i class="fa-regular fa-heart" aria-hidden="true"></i>
         </a>
-        <a href="cart.html" class="icon-btn">
-            <i class="fa-solid fa-cart-shopping"></i>
+        <a href="cart.html" class="icon-btn" aria-label="Open cart">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
         </a>
     </div>
 </header>
 
-<!--MENU-->
-<nav id="sideMenu" class="side-menu">
+<nav id="sideMenu" class="side-menu" aria-label="Main navigation">
+    <a href="index.html">Home</a>
     <a href="gear.html">Gear</a>
     <a href="equipment.html">Equipment</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
 </nav>
 
-<!--SLOGAN-->
-<section class="slogan">
-    <h1>Stay Strong. Stay Pumped.</h1>
-</section>
+<!--MAIN-->
+<main id="mainContent">
+    <section class="slogan">
+        <h1>Stay Strong. Stay Pumped.</h1>
+    </section>
 
-<!--PRODUCTS-->
-<section class="deals">
-    <h2>Deals</h2>
+    <section class="deals">
+        <h2>Deals</h2>
+        <p id="searchResultsMessage" class="search-results-message" aria-live="polite"></p>
 
-    <div class="carousel-container">
-        <button class="arrow left" onclick="scrollProducts(-1)">❮</button>
+        <div class="carousel-container">
+            <button class="arrow left" onclick="scrollProducts(-1)" type="button" aria-label="Scroll left">❮</button>
 
-        <div class="products" id="productSlider">
+            <div class="products" id="productSlider">
 
-            <div class="product"
-                 data-id="1"
-                 data-name="15kg Dumbbells"
-                 data-price="49.99"
-                 data-oldprice="80.00"
-                 data-img="imgs/dumbbells.jpg"
-                 onclick="openProduct(1)">
-                <div class="product-img">
-                    <img src="imgs/dumbbells.jpg" alt="15kg Dumbbells">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="1"
+                     data-name="15kg Dumbbells"
+                     data-price="49.99"
+                     data-oldprice="80.00"
+                     data-img="imgs/dumbbells.jpg"
+                     data-alt="15 kilogram dumbbells for strength training"
+                     onclick="openProduct(1)">
+                    <div class="product-img">
+                        <img src="imgs/dumbbells.jpg" alt="15 kilogram dumbbells for strength training">
+                        <button class="fav-icon" type="button" aria-label="Add 15kg Dumbbells to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add 15kg Dumbbells to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>15kg Dumbbells</h3>
+                    <p class="price"><span class="old-price">$80.00</span> $49.99</p>
                 </div>
-                <h3>15kg Dumbbells</h3>
-                <p class="price"><span class="old-price">$80.00</span> $49.99</p>
+
+                <div class="product"
+                     data-id="2"
+                     data-name="Resistance Bands"
+                     data-price="14.99"
+                     data-oldprice="30.00"
+                     data-img="imgs/bands.jpg"
+                     data-alt="Resistance bands for stretching and strength training"
+                     onclick="openProduct(2)">
+                    <div class="product-img">
+                        <img src="imgs/bands.jpg" alt="Resistance bands for stretching and strength training">
+                        <button class="fav-icon" type="button" aria-label="Add Resistance Bands to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Resistance Bands to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Resistance Bands</h3>
+                    <p class="price"><span class="old-price">$30.00</span> $14.99</p>
+                </div>
+
+                <div class="product"
+                     data-id="3"
+                     data-name="Workout Gloves"
+                     data-price="12.00"
+                     data-oldprice="25.00"
+                     data-img="imgs/gloves.jpg"
+                     data-alt="Workout gloves for grip and hand protection"
+                     onclick="openProduct(3)">
+                    <div class="product-img">
+                        <img src="imgs/gloves.jpg" alt="Workout gloves for grip and hand protection">
+                        <button class="fav-icon" type="button" aria-label="Add Workout Gloves to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Workout Gloves to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Workout Gloves</h3>
+                    <p class="price"><span class="old-price">$25.00</span> $12.00</p>
+                </div>
+
+                <div class="product"
+                     data-id="4"
+                     data-name="Protein Shaker"
+                     data-price="7.00"
+                     data-oldprice="14.99"
+                     data-img="imgs/shaker.jpg"
+                     data-alt="Protein shaker bottle"
+                     onclick="openProduct(4)">
+                    <div class="product-img">
+                        <img src="imgs/shaker.jpg" alt="Protein shaker bottle">
+                        <button class="fav-icon" type="button" aria-label="Add Protein Shaker to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Protein Shaker to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Protein Shaker</h3>
+                    <p class="price"><span class="old-price">$14.99</span> $7.00</p>
+                </div>
+
+                <div class="product"
+                     data-id="5"
+                     data-name="Yoga Mat"
+                     data-price="19.99"
+                     data-oldprice="40.00"
+                     data-img="imgs/mat.jpg"
+                     data-alt="Yoga mat for stretching and floor exercises"
+                     onclick="openProduct(5)">
+                    <div class="product-img">
+                        <img src="imgs/mat.jpg" alt="Yoga mat for stretching and floor exercises">
+                        <button class="fav-icon" type="button" aria-label="Add Yoga Mat to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Yoga Mat to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Yoga Mat</h3>
+                    <p class="price"><span class="old-price">$40.00</span> $19.99</p>
+                </div>
+
+                <div class="product"
+                     data-id="6"
+                     data-name="Jump Rope"
+                     data-price="9.99"
+                     data-oldprice="20.00"
+                     data-img="imgs/rope.jpg"
+                     data-alt="Jump rope for cardio workouts"
+                     onclick="openProduct(6)">
+                    <div class="product-img">
+                        <img src="imgs/rope.jpg" alt="Jump rope for cardio workouts">
+                        <button class="fav-icon" type="button" aria-label="Add Jump Rope to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Jump Rope to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Jump Rope</h3>
+                    <p class="price"><span class="old-price">$20.00</span> $9.99</p>
+                </div>
+
             </div>
 
-            <div class="product"
-                 data-id="2"
-                 data-name="Resistance Bands"
-                 data-price="14.99"
-                 data-oldprice="30.00"
-                 data-img="imgs/bands.jpg"
-                 onclick="openProduct(2)">
-                <div class="product-img">
-                    <img src="imgs/bands.jpg" alt="Resistance Bands">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                </div>
-                <h3>Resistance Bands</h3>
-                <p class="price"><span class="old-price">$30.00</span> $14.99</p>
-            </div>
-
-            <div class="product"
-                 data-id="3"
-                 data-name="Workout Gloves"
-                 data-price="12.00"
-                 data-oldprice="25.00"
-                 data-img="imgs/gloves.jpg"
-                 onclick="openProduct(3)">
-                <div class="product-img">
-                    <img src="imgs/gloves.jpg" alt="Workout Gloves">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                </div>
-                <h3>Workout Gloves</h3>
-                <p class="price"><span class="old-price">$25.00</span> $12.00</p>
-            </div>
-
-            <div class="product"
-                 data-id="4"
-                 data-name="Protein Shaker"
-                 data-price="7.00"
-                 data-oldprice="14.99"
-                 data-img="imgs/shaker.jpg"
-                 onclick="openProduct(4)">
-                <div class="product-img">
-                    <img src="imgs/shaker.jpg" alt="Protein Shaker">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                </div>
-                <h3>Protein Shaker</h3>
-                <p class="price"><span class="old-price">$14.99</span> $7.00</p>
-            </div>
-
-            <div class="product"
-                 data-id="5"
-                 data-name="Yoga Mat"
-                 data-price="19.99"
-                 data-oldprice="40.00"
-                 data-img="imgs/mat.jpg"
-                 onclick="openProduct(5)">
-                <div class="product-img">
-                    <img src="imgs/mat.jpg" alt="Yoga Mat">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                </div>
-                <h3>Yoga Mat</h3>
-                <p class="price"><span class="old-price">$40.00</span> $19.99</p>
-            </div>
-
-            <div class="product"
-                 data-id="6"
-                 data-name="Jump Rope"
-                 data-price="9.99"
-                 data-oldprice="20.00"
-                 data-img="imgs/rope.jpg"
-                 onclick="openProduct(6)">
-                <div class="product-img">
-                    <img src="imgs/rope.jpg" alt="Jump Rope">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                </div>
-                <h3>Jump Rope</h3>
-                <p class="price"><span class="old-price">$20.00</span> $9.99</p>
-            </div>
-
+            <button class="arrow right" onclick="scrollProducts(1)" type="button" aria-label="Scroll right">❯</button>
         </div>
-
-        <button class="arrow right" onclick="scrollProducts(1)">❯</button>
-    </div>
-</section>
+    </section>
+</main>
 
 <script src="script.js"></script>
 </body>
