@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Pump Nation</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-<!-- TOP BAR -->
+<!--BAR&MENU-->
 <header class="topbar">
     <div class="left-section">
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
@@ -18,12 +19,15 @@
     <a href="index.html" class="logo">Pump Nation</a>
 
     <div class="right-section">
-        <button class="icon-btn"><i class="fa-regular fa-heart"></i></button>
-        <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+        <a href="favourites.html" class="icon-btn">
+            <i class="fa-regular fa-heart"></i>
+        </a>
+        <a href="cart.html" class="icon-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
     </div>
 </header>
 
-<!-- SIDE MENU -->
 <nav id="sideMenu" class="side-menu">
     <a href="gear.html">Gear</a>
     <a href="equipment.html">Equipment</a>
@@ -31,38 +35,32 @@
     <a href="contact.html">Contact</a>
 </nav>
 
-<!-- BACKGROUND -->
+<!--MAIN-->
 <div class="contact-bg">
-
     <section class="contact-container">
-
-        <!-- LEFT SIDE -->
         <div class="contact-left">
             <h1>Contact Us</h1>
-
             <p>Got questions? Reach out to us anytime.</p>
 
             <div class="contact-links">
-                <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                <a href="#"><i class="fa-solid fa-envelope"></i> Email</a>
-                <a href="#"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
+                <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                <a href="mailto:info@pumpnation.com"><i class="fa-solid fa-envelope"></i> info@pumpnation.com</a>
+                <a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
             </div>
         </div>
 
-        <!-- RIGHT SIDE (MAP) -->
+        <!--MAP-->
         <div class="contact-right">
-            <iframe 
+            <iframe
                 src="https://www.google.com/maps?q=Zagreb&output=embed"
-                width="100%" 
-                height="100%" 
-                style="border:0;" 
-                allowfullscreen="" 
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
                 loading="lazy">
             </iframe>
         </div>
-
     </section>
-
 </div>
 
 <script src="script.js"></script>
