@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Pump Nation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="product-page-body">
+
+<!--BAR&MENU-->
+<header class="topbar">
+    <div class="left-section">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
+
+    <a href="index.html" class="logo">Pump Nation</a>
+
+    <div class="right-section">
+        <a href="favourites.html" class="icon-btn">
+            <i class="fa-regular fa-heart"></i>
+        </a>
+        <a href="cart.html" class="icon-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </div>
+</header>
+
+<nav id="sideMenu" class="side-menu">
+    <a href="gear.html">Gear</a>
+    <a href="equipment.html">Equipment</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<!--CART-->
+<div class="cart-wrapper">
+    <h1 class="cart-title">Cart</h1>
+
+    <div class="cart-layout">
+        <div class="cart-box" id="cartList">
+            <p class="empty-message">Your cart is empty.</p>
+        </div>
+
+        <!--CHECKOUT-->
+        <div class="checkout-box">
+            <h2>Checkout</h2>
+
+            <p>Total: <strong id="cartTotal">$0.00</strong></p>
+
+            <input type="text" id="firstName" placeholder="First Name">
+            <input type="text" id="lastName" placeholder="Last Name">
+            <input type="text" id="address" placeholder="Address">
+            <input type="text" id="cardNumber" placeholder="Card Number">
+            <input type="text" id="cardMonth" placeholder="MM/YY">
+            <input type="text" id="cardCvc" placeholder="CVC">
+
+            <button class="buy-btn" id="buyNowBtn">
+                Buy Now <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--POPUP-->
+<div id="customModal" class="custom-modal">
+    <div class="custom-modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <p id="modalMessage">Message goes here</p>
+        <button id="modalOkBtn" class="modal-btn">OK</button>
+    </div>
+</div>
+
+<div id="toast" class="toast-message">Added to cart!</div>
+
+<script src="script.js"></script>
+</body>
+</html>
