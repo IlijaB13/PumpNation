@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Pump Nation</title>
+    <title>Contact-Pump Nation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -12,23 +15,35 @@
 <!--BAR&MENU-->
 <header class="topbar">
     <div class="left-section">
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <input type="text" placeholder="Search..." class="search-bar">
+        <button class="menu-icon" onclick="toggleMenu()" aria-label="Open menu" aria-controls="sideMenu" aria-expanded="false" type="button">☰</button>
+
+        <div class="search-wrap">
+            <label for="globalSearch" class="sr-only">Search products</label>
+            <input
+                type="text"
+                id="globalSearch"
+                placeholder="Search..."
+                class="search-bar"
+                onkeydown="handleSearchKey(event)"
+                oninput="handleLiveSearch(event)"
+            >
+        </div>
     </div>
 
     <a href="index.html" class="logo">Pump Nation</a>
 
     <div class="right-section">
-        <a href="favourites.html" class="icon-btn">
-            <i class="fa-regular fa-heart"></i>
+        <a href="favourites.html" class="icon-btn" aria-label="Open favourites">
+            <i class="fa-regular fa-heart" aria-hidden="true"></i>
         </a>
-        <a href="cart.html" class="icon-btn">
-            <i class="fa-solid fa-cart-shopping"></i>
+        <a href="cart.html" class="icon-btn" aria-label="Open cart">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
         </a>
     </div>
 </header>
 
-<nav id="sideMenu" class="side-menu">
+<nav id="sideMenu" class="side-menu" aria-label="Main navigation">
+    <a href="index.html">Home</a>
     <a href="gear.html">Gear</a>
     <a href="equipment.html">Equipment</a>
     <a href="about.html">About</a>
@@ -36,32 +51,35 @@
 </nav>
 
 <!--MAIN-->
-<div class="contact-bg">
-    <section class="contact-container">
-        <div class="contact-left">
-            <h1>Contact Us</h1>
-            <p>Got questions? Reach out to us anytime.</p>
+<main id="mainContent">
+    <div class="contact-bg">
+        <section class="contact-container">
+            <div class="contact-left">
+                <h1>Contact Us</h1>
+                <p>Got questions? Reach out to us anytime.</p>
 
-            <div class="contact-links">
-                <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                <a href="mailto:info@pumpnation.com"><i class="fa-solid fa-envelope"></i> info@pumpnation.com</a>
-                <a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
+                <div class="contact-links">
+                    <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram</a>
+                    <a href="mailto:info@pumpnation.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> info@pumpnation.com</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i> Twitter / X</a>
+                </div>
             </div>
-        </div>
-
-        <!--MAP-->
-        <div class="contact-right">
-            <iframe
-                src="https://www.google.com/maps?q=Zagreb&output=embed"
-                width="100%"
-                height="100%"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy">
-            </iframe>
-        </div>
-    </section>
-</div>
+            
+            <!--MAP-->
+            <div class="contact-right">
+                <iframe
+                    src="https://www.google.com/maps?q=Zagreb&output=embed"
+                    width="100%"
+                    height="100%"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    title="Map showing Zagreb">
+                </iframe>
+            </div>
+        </section>
+    </div>
+</main>
 
 <script src="script.js"></script>
 </body>
