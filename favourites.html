@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favourites - Pump Nation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="product-page-body">
+
+
+<!--BAR&MENU-->
+<header class="topbar">
+    <div class="left-section">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
+
+    <a href="index.html" class="logo">Pump Nation</a>
+
+    <div class="right-section">
+        <a href="favourites.html" class="icon-btn">
+            <i class="fa-regular fa-heart"></i>
+        </a>
+        <a href="cart.html" class="icon-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </div>
+</header>
+
+<nav id="sideMenu" class="side-menu">
+    <a href="gear.html">Gear</a>
+    <a href="equipment.html">Equipment</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<!--MAIN-->
+<div class="favorites-wrapper">
+    <h1 class="favorites-title">Favourites</h1>
+
+    <div class="favorites-box" id="favoritesList">
+        <p>No favourites yet.</p>
+    </div>
+
+    <button class="add-cart-fav" id="addSelectedToCart">
+        Add Selected to Cart <i class="fa-solid fa-cart-shopping"></i>
+    </button>
+</div>
+
+<!--POPUP-->
+<div id="customModal" class="custom-modal">
+    <div class="custom-modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <p id="modalMessage">Message goes here</p>
+        <button id="modalOkBtn" class="modal-btn">OK</button>
+    </div>
+</div>
+
+<div id="toast" class="toast-message">Added to cart!</div>
+
+<script src="script.js"></script>
+</body>
+</html>
