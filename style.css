@@ -110,6 +110,7 @@ h1, h2, h3, .logo {
     top: 60px;
     bottom: 0;
     width: 220px;
+    margin: 0;
     background: #1365bb;
     transition: left 0.3s;
     z-index: 999;
