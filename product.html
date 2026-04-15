@@ -8,7 +8,7 @@
 </head>
 <body class="product-page-body">
 
-<!-- TOP BAR -->
+<!--BAR&MENU-->
 <header class="topbar">
     <div class="left-section">
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
@@ -17,57 +17,62 @@
     <a href="index.html" class="logo">Pump Nation</a>
 
     <div class="right-section">
-        <button class="icon-btn"><i class="fa-regular fa-heart"></i></button>
-        <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+        <a href="favourites.html" class="icon-btn">
+            <i class="fa-regular fa-heart"></i>
+        </a>
+        <a href="cart.html" class="icon-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
     </div>
 </header>
 
-<!-- SIDE MENU -->
 <nav id="sideMenu" class="side-menu">
-    <a href="equipment.html">Equipment</a>
     <a href="gear.html">Gear</a>
+    <a href="equipment.html">Equipment</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
 </nav>
 
+<!--MAIN-->
 <div class="product-wrapper">
-
     <div class="product-box">
 
-        <!-- LEFT SIDE -->
         <div class="left-side">
-
             <h1 id="productName"></h1>
-
-            <img id="productImg">
-
+            <img id="productImg" alt="">
             <p class="price" id="productPrice"></p>
-
         </div>
 
-        <!-- RIGHT SIDE -->
         <div class="right-side">
-
             <div class="desc-box">
                 <p id="productDesc"></p>
             </div>
 
             <div id="sizeContainer" class="size-container" style="display: none;">
-                <label>Select Size:</label>
+                <label for="sizeSelect">Select Size:</label>
                 <select id="sizeSelect">
                     <option value="">Choose size</option>
                 </select>
             </div>
 
-            <button class="add-cart">
+            <button class="add-cart" id="addToCartBtn">
                 Add to Cart <i class="fa-solid fa-cart-shopping"></i>
             </button>
-
         </div>
 
     </div>
-
 </div>
+
+<!--POPUP-->
+<div id="customModal" class="custom-modal">
+    <div class="custom-modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <p id="modalMessage">Message goes here</p>
+        <button id="modalOkBtn" class="modal-btn">OK</button>
+    </div>
+</div>
+
+<div id="toast" class="toast-message">Added to cart!</div>
 
 <script src="script.js"></script>
 </body>
