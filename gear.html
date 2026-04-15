@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- TOP BAR (same as homepage) -->
+<!--BAR&MENU-->
 <header class="topbar">
     <div class="left-section">
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
@@ -20,12 +20,15 @@
     </a>
 
     <div class="right-section">
-        <button class="icon-btn"><i class="fa-regular fa-heart"></i></button>
-        <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+        <a href="favourites.html" class="icon-btn">
+            <i class="fa-regular fa-heart"></i>
+        </a>
+        <a href="cart.html" class="icon-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
     </div>
 </header>
 
-<!-- SIDE MENU -->
 <nav id="sideMenu" class="side-menu">
     <a href="gear.html">Gear</a>
     <a href="equipment.html">Equipment</a>
@@ -33,104 +36,105 @@
     <a href="contact.html">Contact</a>
 </nav>
 
-<!-- BACKGROUND WRAPPER -->
+<!--PRODUCTS-->
 <div class="equipment-bg">
-
     <section class="equipment">
         <h2>Gear</h2>
 
         <div class="grid">
 
-            <div class="product" onclick="openProduct(7)">
-    
-                 <div class="product-img">
-                     <img src="imgs/jacket.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-
-                 <h3>Windbreaker</h3>
-                 <p class="price">$69.99</p>
-
+            <div class="product"
+                 data-id="7"
+                 data-name="Windbreaker"
+                 data-price="69.99"
+                 data-img="imgs/jacket.jpg"
+                 onclick="openProduct(7)">
+                <div class="product-img">
+                    <img src="imgs/jacket.jpg" alt="Windbreaker">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Windbreaker</h3>
+                <p class="price">$69.99</p>
             </div>
 
-            <div class="product" onclick="openProduct(8)">
+            <div class="product"
+                 data-id="8"
+                 data-name="Women's Leggings"
+                 data-price="19.99"
+                 data-img="imgs/leg.jpg"
+                 onclick="openProduct(8)">
                 <div class="product-img">
-                     <img src="imgs/leg.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>Women's Leggings</h3>
-                 <p class="price">$19.99</p>
+                    <img src="imgs/leg.jpg" alt="Women's Leggings">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Women's Leggings</h3>
+                <p class="price">$19.99</p>
             </div>
 
-            <div class="product" onclick="openProduct(9)">
+            <div class="product"
+                 data-id="9"
+                 data-name="T-Shirt"
+                 data-price="25.00"
+                 data-img="imgs/shirt.jpg"
+                 onclick="openProduct(9)">
                 <div class="product-img">
-                     <img src="imgs/shirt.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>T-Shirt</h3>
-                 <p class="price">$25.00</p>
+                    <img src="imgs/shirt.jpg" alt="T-Shirt">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>T-Shirt</h3>
+                <p class="price">$25.00</p>
             </div>
 
-            <div class="product" onclick="openProduct(10)">
+            <div class="product"
+                 data-id="10"
+                 data-name="Running Shoes"
+                 data-price="129.99"
+                 data-img="imgs/shoe.jpg"
+                 onclick="openProduct(10)">
                 <div class="product-img">
-                     <img src="imgs/shoe.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>Running Shoes</h3>
-                 <p class="price">$129.99</p>
+                    <img src="imgs/shoe.jpg" alt="Running Shoes">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Running Shoes</h3>
+                <p class="price">$129.99</p>
             </div>
 
-            <div class="product" onclick="openProduct(11)">
+            <div class="product"
+                 data-id="11"
+                 data-name="Running Shoes (Pro)"
+                 data-price="115.00"
+                 data-img="imgs/shoe2.jpg"
+                 onclick="openProduct(11)">
                 <div class="product-img">
-                     <img src="imgs/shoe2.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>Running Shoes (Pro)</h3>
-                 <p class="price">$115.00</p>
+                    <img src="imgs/shoe2.jpg" alt="Running Shoes (Pro)">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Running Shoes (Pro)</h3>
+                <p class="price">$115.00</p>
             </div>
 
-            <div class="product" onclick="openProduct(12)">
+            <div class="product"
+                 data-id="12"
+                 data-name="Women's Tank Top"
+                 data-price="15.00"
+                 data-img="imgs/tank.jpg"
+                 onclick="openProduct(12)">
                 <div class="product-img">
-                     <img src="imgs/tank.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>Women's Tank Top</h3>
-                 <p class="price">$15.00</p>
+                    <img src="imgs/tank.jpg" alt="Women's Tank Top">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Women's Tank Top</h3>
+                <p class="price">$15.00</p>
             </div>
 
         </div>
     </section>
-
 </div>
 
 <script src="script.js"></script>
