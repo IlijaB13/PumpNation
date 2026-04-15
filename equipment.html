@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- TOP BAR (same as homepage) -->
+<!--BAR&MENU-->
 <header class="topbar">
     <div class="left-section">
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
@@ -20,12 +20,15 @@
     </a>
 
     <div class="right-section">
-        <button class="icon-btn"><i class="fa-regular fa-heart"></i></button>
-        <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+        <a href="favourites.html" class="icon-btn">
+            <i class="fa-regular fa-heart"></i>
+        </a>
+        <a href="cart.html" class="icon-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
     </div>
 </header>
 
-<!-- SIDE MENU -->
 <nav id="sideMenu" class="side-menu">
     <a href="gear.html">Gear</a>
     <a href="equipment.html">Equipment</a>
@@ -33,104 +36,105 @@
     <a href="contact.html">Contact</a>
 </nav>
 
-<!-- BACKGROUND WRAPPER -->
+<!--PRODUCTS-->
 <div class="equipment-bg">
-
     <section class="equipment">
         <h2>Equipment</h2>
 
         <div class="grid">
 
-            <div class="product" onclick="openProduct(13)">
-    
-                 <div class="product-img">
-                     <img src="imgs/5kg.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-
-                 <h3>5kg Dumbbells</h3>
-                 <p class="price">$30.00</p>
-
+            <div class="product"
+                 data-id="13"
+                 data-name="5kg Dumbbells"
+                 data-price="30.00"
+                 data-img="imgs/5kg.jpg"
+                 onclick="openProduct(13)">
+                <div class="product-img">
+                    <img src="imgs/5kg.jpg" alt="5kg Dumbbells">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>5kg Dumbbells</h3>
+                <p class="price">$30.00</p>
             </div>
 
-            <div class="product" onclick="openProduct(14)">
+            <div class="product"
+                 data-id="14"
+                 data-name="10kg Dumbbells"
+                 data-price="49.99"
+                 data-img="imgs/10kg.jpg"
+                 onclick="openProduct(14)">
                 <div class="product-img">
-                     <img src="imgs/10kg.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>10kg Dumbbells</h3>
-                 <p class="price">$49.99</p>
+                    <img src="imgs/10kg.jpg" alt="10kg Dumbbells">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>10kg Dumbbells</h3>
+                <p class="price">$49.99</p>
             </div>
 
-            <div class="product" onclick="openProduct(15)">
+            <div class="product"
+                 data-id="15"
+                 data-name="20kg Dumbbells"
+                 data-price="99.99"
+                 data-img="imgs/20kg.jpg"
+                 onclick="openProduct(15)">
                 <div class="product-img">
-                     <img src="imgs/20kg.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>20kg Dumbbells</h3>
-                 <p class="price">$99.99</p>
+                    <img src="imgs/20kg.jpg" alt="20kg Dumbbells">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>20kg Dumbbells</h3>
+                <p class="price">$99.99</p>
             </div>
 
-            <div class="product" onclick="openProduct(16)">
+            <div class="product"
+                 data-id="16"
+                 data-name="Barbell Bar"
+                 data-price="179.99"
+                 data-img="imgs/barb.jpg"
+                 onclick="openProduct(16)">
                 <div class="product-img">
-                     <img src="imgs//barb.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>Barbell Bar</h3>
-                 <p class="price">$179.99</p>
+                    <img src="imgs/barb.jpg" alt="Barbell Bar">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Barbell Bar</h3>
+                <p class="price">$179.99</p>
             </div>
 
-            <div class="product" onclick="openProduct(17)">
+            <div class="product"
+                 data-id="17"
+                 data-name="12kg Kettlebell"
+                 data-price="40.00"
+                 data-img="imgs/kettle.jpg"
+                 onclick="openProduct(17)">
                 <div class="product-img">
-                     <img src="imgs/kettle.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>12kg Kettlebell</h3>
-                 <p class="price">$40.00</p>
+                    <img src="imgs/kettle.jpg" alt="12kg Kettlebell">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>12kg Kettlebell</h3>
+                <p class="price">$40.00</p>
             </div>
 
-            <div class="product" onclick="openProduct(18)">
+            <div class="product"
+                 data-id="18"
+                 data-name="Multi-Functional Bench"
+                 data-price="50.00"
+                 data-img="imgs/bench.jpg"
+                 onclick="openProduct(18)">
                 <div class="product-img">
-                     <img src="imgs/bench.jpg">
-
-                     <!-- HEART -->
-                     <i class="fa-regular fa-heart fav-icon"></i>
-
-                     <!-- CART -->
-                     <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                 </div>
-                 <h3>Multi-Functional Bench</h3>
-                 <p class="price">$50.00</p>
+                    <img src="imgs/bench.jpg" alt="Multi-Functional Bench">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Multi-Functional Bench</h3>
+                <p class="price">$50.00</p>
             </div>
 
         </div>
     </section>
-
 </div>
 
 <script src="script.js"></script>
