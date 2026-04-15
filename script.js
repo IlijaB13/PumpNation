@@ -1,254 +1,570 @@
-// TOGGLE SIDE MENU
+//MENU
 function toggleMenu() {
-    let menu = document.getElementById("sideMenu");
-    menu.classList.toggle("open");
+    const sideMenu = document.getElementById("sideMenu");
+    if (sideMenu) {
+        sideMenu.classList.toggle("open");
+    }
 }
 
-function openProduct(id) {
-    window.location.href = "product.html?id=" + id;
+//READ PRODCUTS&SAVE TO FAVOURITES&CART
+function getFavourites() {
+    return JSON.parse(localStorage.getItem("favourites")) || [];
+}
+
+function saveFavourites(favourites) {
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+}
+
+function getCart() {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
+function saveCart(cart) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function getSelectedProduct() {
+    return JSON.parse(localStorage.getItem("selectedProduct"));
+}
+
+function saveSelectedProduct(product) {
+    localStorage.setItem("selectedProduct", JSON.stringify(product));
+}
+
+//POPUP
+function showModal(message) {
+    const modal = document.getElementById("customModal");
+    const modalMessage = document.getElementById("modalMessage");
+
+    if (!modal || !modalMessage) return;
+
+    modalMessage.textContent = message;
+    modal.classList.add("show");
+}
+
+function closeModal() {
+    const modal = document.getElementById("customModal");
+    if (modal) {
+        modal.classList.remove("show");
+    }
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(function () {
+        toast.classList.remove("show");
+    }, 2000);
 }
 
 
-// PRODUCT CAROUSEL SCROLL
+//PRODUCT CHECKS FAV&CART
+function isFavourite(productId) {
+    const favourites = getFavourites();
+    return favourites.some(function (item) {
+        return item.id === productId;
+    });
+}
+
+function isInCart(productId) {
+    const cart = getCart();
+    return cart.some(function (item) {
+        return item.id === productId;
+    });
+}
+
+//ALL PRODUCTS
+function getProductDetails(productId) {
+    const productInfo = {
+        1: { desc: "Heavy-duty 15kg dumbbells for strength training and home workouts.", type: "equipment" },
+        2: { desc: "Resistance bands for stretching, strength work, and mobility exercises.", type: "equipment" },
+        3: { desc: "Workout gloves for better grip and hand protection during lifting.", type: "equipment" },
+        4: { desc: "Protein shaker bottle for smooth mixing before or after workouts.", type: "equipment" },
+        5: { desc: "Comfortable yoga mat for stretching, yoga, and floor exercises.", type: "equipment" },
+        6: { desc: "Jump rope for cardio, warmups, and endurance training.", type: "equipment" },
+        7: { desc: "Lightweight windbreaker for training outdoors in cooler weather.", type: "clothing" },
+        8: { desc: "Flexible women's leggings designed for comfort and movement.", type: "clothing" },
+        9: { desc: "Breathable t-shirt for training or everyday casual wear.", type: "clothing" },
+        10: { desc: "Running shoes built for comfort, grip, and daily training support.", type: "shoes" },
+        11: { desc: "Premium running shoes with extra support and cushioning.", type: "shoes" },
+        12: { desc: "Women's tank top made for workouts, layering, and comfort.", type: "clothing" },
+        13: { desc: "5kg dumbbells for beginner strength training and toning sessions.", type: "equipment" },
+        14: { desc: "10kg dumbbells for intermediate training and home gym workouts.", type: "equipment" },
+        15: { desc: "20kg dumbbells for heavier strength and resistance training.", type: "equipment" },
+        16: { desc: "Strong barbell bar for compound lifts and serious training sessions.", type: "equipment" },
+        17: { desc: "12kg kettlebell for swings, squats, presses, and full-body training.", type: "equipment" },
+        18: { desc: "Multi-functional bench for presses, seated work, and home gym setups.", type: "equipment" }
+    };
+
+    return productInfo[productId] || {
+        desc: "No description available.",
+        type: "equipment"
+    };
+}
+
+//SIZE POPUP
+function openProduct(productId, showSizeMessage) {
+    const product = document.querySelector('.product[data-id="' + productId + '"]');
+
+    if (!product) return;
+
+    const productData = {
+        id: product.dataset.id,
+        name: product.dataset.name,
+        price: product.dataset.price,
+        oldPrice: product.dataset.oldprice || "",
+        img: product.dataset.img
+    };
+
+    saveSelectedProduct(productData);
+
+    if (showSizeMessage) {
+        localStorage.setItem("sizeNotice", "true");
+    }
+
+    window.location.href = "product.html";
+}
+
+//CAROUSEL
 function scrollProducts(direction) {
     const slider = document.getElementById("productSlider");
-
     if (!slider) return;
 
-    const card = slider.children[0];
-    if (!card) return;
+    const firstCard = slider.querySelector(".product");
+    if (!firstCard) return;
 
-    const style = window.getComputedStyle(slider);
-    const gap = parseInt(style.gap) || 20;
+    const gap = parseInt(window.getComputedStyle(slider).gap) || 20;
+    const scrollAmount = firstCard.offsetWidth + gap;
 
-    const cardWidth = card.offsetWidth + gap;
-
-    // 👉 If going LEFT at the start → jump to end
-    if (direction === -1 && slider.scrollLeft <= 0) {
-        slider.scrollLeft = slider.scrollWidth;
-        return;
-    }
-
-    // 👉 If going RIGHT at the end → jump to start
-    if (
-        direction === 1 &&
-        slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5
-    ) {
-        slider.scrollLeft = 0;
-        return;
-    }
-
-    // 👉 Normal scroll
     slider.scrollBy({
-        left: direction * cardWidth,
+        left: direction * scrollAmount,
         behavior: "smooth"
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+//ADD TO CART
+function addToCart(productData) {
+    let cart = getCart();
+    cart.push(productData);
+    saveCart(cart);
+}
 
-    // ❤️ FAVORITES
-    document.querySelectorAll(".fav-icon").forEach(icon => {
-        icon.addEventListener("click", (e) => {
-            e.stopPropagation();
+//UPDATE FAV&CART
+function updateIcons() {
+    const products = document.querySelectorAll(".product");
 
-            icon.classList.toggle("active");
+    products.forEach(function (product) {
+        const productId = product.dataset.id;
+        const heartIcon = product.querySelector(".fav-icon");
+        const cartIcon = product.querySelector(".cart-icon");
 
-            if (icon.classList.contains("active")) {
-                icon.classList.remove("fa-regular");
-                icon.classList.add("fa-solid");
+        if (heartIcon) {
+            if (isFavourite(productId)) {
+                heartIcon.classList.remove("fa-regular");
+                heartIcon.classList.add("fa-solid");
+                heartIcon.style.color = "red";
             } else {
-                icon.classList.remove("fa-solid");
-                icon.classList.add("fa-regular");
+                heartIcon.classList.remove("fa-solid");
+                heartIcon.classList.add("fa-regular");
+                heartIcon.style.color = "";
             }
-        });
+        }
+
+        if (cartIcon) {
+            if (isInCart(productId)) {
+                cartIcon.classList.add("active-cart");
+            } else {
+                cartIcon.classList.remove("active-cart");
+            }
+        }
     });
+}
 
-    // 🛒 CART
-    document.querySelectorAll(".cart-icon").forEach(icon => {
-        icon.addEventListener("click", (e) => {
-            e.stopPropagation();
+//FAV&CART CLICKABLES
+function setupProductButtons() {
+    const products = document.querySelectorAll(".product");
 
-            icon.classList.toggle("active");
-        });
-    });
+    products.forEach(function (product) {
+        const heartIcon = product.querySelector(".fav-icon");
+        const cartIcon = product.querySelector(".cart-icon");
 
-});
+        const productData = {
+            id: product.dataset.id,
+            name: product.dataset.name,
+            price: product.dataset.price,
+            oldPrice: product.dataset.oldprice || "",
+            img: product.dataset.img
+        };
 
-const products = {
+        if (heartIcon) {
+            heartIcon.addEventListener("click", function (event) {
+                event.stopPropagation();
 
-    // 🟢 HOMEPAGE (1–6)
-    1: {
-        name: "15kg Dumbbells (2pcs)",
-        price: "$49.99",
-        img: "imgs/dumbbells.jpg",
-        desc: "Set of 2x 15kg dumbbells made from solid cast iron with a protective rubber coating. Ergonomic anti-slip handles. Ideal for strength training, hypertrophy, and progressive overload workouts."
-    },
-    2: {
-        name: "Resistance Bands",
-        price: "$14.99",
-        img: "imgs/bands.jpg",
-        desc: "Set of elastic resistance bands made from durable latex material. Includes multiple resistance levels (light to heavy). Perfect for full-body workouts, mobility, and rehabilitation exercises."
-    },
-    3: {
-        name: "Workout Gloves",
-        price: "$12.00",
-        img: "imgs/gloves.jpg",
-        desc: "Breathable workout gloves made from microfiber and mesh fabric. Padded palm for grip and protection. Adjustable wrist strap. Available sizes: S, M, L.",
-        sizes: ["S", "M", "L"]
-    },
-    4: {
-        name: "Protein Shaker",
-        price: "$7.00",
-        img: "imgs/shaker.jpg",
-        desc: "600ml BPA-free plastic shaker bottle with leak-proof lid and mixing ball. Ideal for protein shakes, pre-workout, and hydration on the go."
-    },
-    5: {
-        name: "Yoga Mat",
-        price: "$19.99",
-        img: "imgs/mat.jpg",
-        desc: "Non-slip yoga mat made from eco-friendly TPE material. 6mm thickness for comfort and joint support. Suitable for yoga, pilates, stretching, and home workouts."
-    },
-    6: {
-        name: "Jump Rope",
-        price: "$9.99",
-        img: "imgs/rope.jpg",
-        desc: "Adjustable speed jump rope with steel cable and foam handles. Length: up to 3m. Perfect for cardio, endurance training, and fat burning workouts."
-    },
+                let favourites = getFavourites();
+                const exists = favourites.some(function (item) {
+                    return item.id === productData.id;
+                });
 
-    // 🔵 GEAR (7–12)
-    7: {
-        name: "Windbreaker",
-        price: "$69.99",
-        img: "imgs/jacket.jpg",
-        desc: "Lightweight windbreaker made from water-resistant polyester. Breathable inner lining and zip closure. Ideal for outdoor workouts. Available sizes: S, M, L, XL.",
-        sizes: ["S", "M", "L", "XL"]
-    },
-    8: {
-        name: "Women's Leggings",
-        price: "$19.99",
-        img: "imgs/leg.jpg",
-        desc: "High-waisted leggings made from stretchable nylon-spandex blend. Sweat-wicking and breathable. Designed for gym training, yoga, and everyday wear. Sizes: XS–XL.",
-        sizes: ["XS", "S", "M", "L", "XL"]
-    },
-    9: {
-        name: "T-Shirt",
-        price: "$25.00",
-        img: "imgs/shirt.jpg",
-        desc: "Athletic fit t-shirt made from cotton-polyester blend. Soft, breathable, and moisture-wicking. Perfect for workouts or casual wear. Available sizes: S–XL.",
-        sizes: ["S", "M", "L", "XL"]
-    },
-    10: {
-        name: "Running Shoes",
-        price: "$129.99",
-        img: "imgs/shoe.jpg",
-        desc: "High-performance running shoes with breathable mesh upper and cushioned sole. Anti-slip rubber outsole for stability. Available sizes: EU 38–45.",
-        sizes: ["38", "39", "40", "41", "42", "43", "44", "45"]
-    },
-    11: {
-        name: "Running Shoes (Pro)",
-        price: "$115.00",
-        img: "imgs/shoe2.jpg",
-        desc: "Advanced running shoes featuring reinforced sole support and shock absorption technology. Lightweight design for speed and endurance. Sizes: EU 38–45.",
-        sizes: ["38", "39", "40", "41", "42", "43", "44", "45"]
-    },
-    12: {
-        name: "Women's Tank Top",
-        price: "$15.00",
-        img: "imgs/tank.jpg",
-        desc: "Lightweight tank top made from breathable polyester fabric. Slim fit design for comfort and mobility. Ideal for intense workouts. Sizes: XS–XL.",
-        sizes: ["XS", "S", "M", "L", "XL"]   
-    },
-
-    // 🔴 EQUIPMENT (13–18)
-    13: {
-        name: "5kg Dumbbells (2pcs)",
-        price: "$30.00",
-        img: "imgs/5kg.jpg",
-        desc: "Set of 2x 5kg dumbbells made from cast iron with rubber coating. Compact and durable. Perfect for beginners and light resistance training."
-    },
-    14: {
-        name: "10kg Dumbbells (2pcs)",
-        price: "$49.99",
-        img: "imgs/10kg.jpg",
-        desc: "Set of 2x 10kg dumbbells with anti-slip grip handles. Rubber-coated for floor protection. Ideal for intermediate strength workouts."
-    },
-    15: {
-        name: "20kg Dumbbells (2pcs)",
-        price: "$99.99",
-        img: "imgs/20kg.jpg",
-        desc: "Set of 2x 20kg heavy-duty dumbbells made from solid steel core with rubber coating. Designed for advanced strength training and heavy lifting."
-    },
-    16: {
-        name: "Barbell Bar",
-        price: "$179.99",
-        img: "imgs/barb.jpg",
-        desc: "Olympic barbell made from hardened steel. Length: 180cm. Weight capacity: up to 300kg. Ideal for squats, bench press, and deadlifts."
-    },
-    17: {
-        name: "12kg Kettlebell",
-        price: "$40.00",
-        img: "imgs/kettle.jpg",
-        desc: "12kg kettlebell made from cast iron with textured grip handle. Perfect for strength, conditioning, and functional training."
-    },
-    18: {
-        name: "Multi-Functional Bench",
-        price: "$50.00",
-        img: "imgs/bench.jpg",
-        desc: "Adjustable workout bench with multiple incline positions. Steel frame with padded cushioning. Suitable for full-body strength training."
-    }
-
-};
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-
-    if (products[id]) {
-
-        // 🧠 LOAD PRODUCT DATA
-        document.getElementById("productName").textContent = products[id].name;
-        document.getElementById("productPrice").textContent = products[id].price;
-        document.getElementById("productImg").src = products[id].img;
-        document.getElementById("productDesc").textContent = products[id].desc;
-
-        // 📏 SIZE SELECTOR
-        const sizeContainer = document.getElementById("sizeContainer");
-        const sizeSelect = document.getElementById("sizeSelect");
-
-        if (products[id].sizes) {
-            sizeContainer.style.display = "block";
-
-            products[id].sizes.forEach(size => {
-                const option = document.createElement("option");
-                option.value = size;
-                option.textContent = size;
-                sizeSelect.appendChild(option);
+                if (exists) {
+                    favourites = favourites.filter(function (item) {
+                        return item.id !== productData.id;
+                    });
+                    saveFavourites(favourites);
+                    updateIcons();
+                    showToast("Removed from favourites");
+                } else {
+                    favourites.push(productData);
+                    saveFavourites(favourites);
+                    updateIcons();
+                    showToast("Added to favourites");
+                }
             });
         }
 
-        // 🛒 ADD TO CART BUTTON
-        const addBtn = document.querySelector(".add-cart");
+        if (cartIcon) {
+            cartIcon.addEventListener("click", function (event) {
+                event.stopPropagation();
 
-        if (addBtn) {
-            addBtn.addEventListener("click", () => {
+                const details = getProductDetails(Number(productData.id));
 
-                const product = products[id];
-
-                if (product.sizes) {
-                    const selectedSize = document.getElementById("sizeSelect").value;
-
-                    if (!selectedSize) {
-                        alert("Please select a size!");
-                        return;
-                    }
+                if (details.type === "clothing" || details.type === "shoes") {
+                    openProduct(productData.id, true);
+                    return;
                 }
 
-                alert("Added to cart!");
+                addToCart({
+                    id: productData.id,
+                    name: productData.name,
+                    price: productData.price,
+                    oldPrice: productData.oldPrice,
+                    img: productData.img,
+                    size: ""
+                });
+
+                localStorage.setItem("cartToast", "Added to cart!");
+                window.location.href = "cart.html";
+            });
+        }
+    });
+}
+
+//PRODUCT PG
+function loadProductPage() {
+    const productName = document.getElementById("productName");
+    const productImg = document.getElementById("productImg");
+    const productPrice = document.getElementById("productPrice");
+    const productDesc = document.getElementById("productDesc");
+    const sizeContainer = document.getElementById("sizeContainer");
+    const sizeSelect = document.getElementById("sizeSelect");
+    const addToCartBtn = document.getElementById("addToCartBtn");
+
+    if (!productName || !productImg || !productPrice || !productDesc || !addToCartBtn) {
+        return;
+    }
+
+    const selectedProduct = getSelectedProduct();
+
+    if (!selectedProduct) {
+        productName.textContent = "Product not found";
+        productDesc.textContent = "No product was selected.";
+        return;
+    }
+
+    const details = getProductDetails(Number(selectedProduct.id));
+
+    productName.textContent = selectedProduct.name;
+    productImg.src = selectedProduct.img;
+    productImg.alt = selectedProduct.name;
+    productDesc.textContent = details.desc;
+
+    if (selectedProduct.oldPrice) {
+        productPrice.innerHTML = '<span class="old-price">$' + selectedProduct.oldPrice + '</span> $' + selectedProduct.price;
+    } else {
+        productPrice.textContent = '$' + selectedProduct.price;
+    }
+
+    if (details.type === "clothing") {
+        sizeContainer.style.display = "block";
+        sizeSelect.innerHTML = `
+            <option value="">Choose size</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+        `;
+    } else if (details.type === "shoes") {
+        sizeContainer.style.display = "block";
+        sizeSelect.innerHTML = `
+            <option value="">Choose size</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+            <option value="45">45</option>
+        `;
+    } else {
+        sizeContainer.style.display = "none";
+    }
+
+    if (localStorage.getItem("sizeNotice") === "true") {
+        const redirectMessage = localStorage.getItem("sizeRedirectMessage") || "Please choose a size before adding this item to the cart.";
+        showModal(redirectMessage);
+        localStorage.removeItem("sizeNotice");
+        localStorage.removeItem("sizeRedirectMessage");
+    }
+
+    addToCartBtn.addEventListener("click", function () {
+        let chosenSize = "";
+
+        if (details.type === "clothing" || details.type === "shoes") {
+            chosenSize = sizeSelect.value;
+
+            if (chosenSize === "") {
+                showModal("Please choose a size first.");
+                return;
+            }
+        }
+
+        const cartItem = {
+            id: selectedProduct.id,
+            name: selectedProduct.name,
+            price: selectedProduct.price,
+            oldPrice: selectedProduct.oldPrice || "",
+            img: selectedProduct.img,
+            size: chosenSize
+        };
+
+        addToCart(cartItem);
+        showToast("Added to cart!");
+    });
+}
+
+//FAVOURITES PG
+function renderFavouritesPage() {
+    const favoritesList = document.getElementById("favoritesList");
+    const addSelectedBtn = document.getElementById("addSelectedToCart");
+
+    if (!favoritesList || !addSelectedBtn) return;
+
+    const favourites = getFavourites();
+
+    if (favourites.length === 0) {
+        favoritesList.innerHTML = "<p>No favourites yet.</p>";
+        addSelectedBtn.disabled = true;
+        return;
+    }
+
+    addSelectedBtn.disabled = false;
+    favoritesList.innerHTML = "";
+
+    favourites.forEach(function (item, index) {
+        const favItem = document.createElement("div");
+        favItem.className = "fav-item";
+
+        favItem.innerHTML = `
+            <div class="fav-left">
+                <input type="checkbox" class="fav-check" data-index="${index}">
+                <img src="${item.img}" alt="${item.name}">
+                <div class="fav-info">
+                    <h3>${item.name}</h3>
+                    <p class="price">$${Number(item.price).toFixed(2)}</p>
+                </div>
+            </div>
+        `;
+
+        favoritesList.appendChild(favItem);
+    });
+
+    addSelectedBtn.onclick = function () {
+        const checkedBoxes = document.querySelectorAll(".fav-check:checked");
+
+        if (checkedBoxes.length === 0) {
+            showModal("Please select at least one favourite item.");
+            return;
+        }
+
+        let cart = getCart();
+
+        for (let checkbox of checkedBoxes) {
+            const index = checkbox.dataset.index;
+            const item = favourites[index];
+            const details = getProductDetails(Number(item.id));
+
+            if (details.type === "clothing" || details.type === "shoes") {
+                saveSelectedProduct(item);
+                localStorage.setItem("sizeNotice", "true");
+                localStorage.setItem("sizeRedirectMessage", "A size is missing for this item. Please choose a size before adding it to the cart.");
+                window.location.href = "product.html";
+                return;
+            }
+
+            cart.push({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                oldPrice: item.oldPrice || "",
+                img: item.img,
+                size: ""
             });
         }
 
+        saveCart(cart);
+        localStorage.setItem("cartToast", "Selected items added to cart!");
+        window.location.href = "cart.html";
+    };
+}
+
+//CART PG
+function renderCartPage() {
+    const cartList = document.getElementById("cartList");
+    const cartTotal = document.getElementById("cartTotal");
+    const buyNowBtn = document.getElementById("buyNowBtn");
+
+    if (!cartList || !cartTotal) return;
+
+    let cart = getCart();
+
+    function updateCartDisplay() {
+        cart = getCart();
+
+        if (cart.length === 0) {
+            cartList.innerHTML = '<p class="empty-message">Your cart is empty.</p>';
+            cartTotal.textContent = "$0.00";
+            return;
+        }
+
+        cartList.innerHTML = "";
+        let total = 0;
+
+        cart.forEach(function (item, index) {
+            total += Number(item.price);
+
+            const cartItem = document.createElement("div");
+            cartItem.className = "cart-item";
+
+            cartItem.innerHTML = `
+                <div class="cart-left">
+                    <img src="${item.img}" alt="${item.name}">
+                    <div class="cart-info">
+                        <h3>${item.name}</h3>
+                        <p>${item.size ? "Size: " + item.size : "No size needed"}</p>
+                    </div>
+                </div>
+
+                <div class="fav-right">
+                    <div class="cart-price">$${Number(item.price).toFixed(2)}</div>
+                    <button class="remove-btn" data-index="${index}">&times;</button>
+                </div>
+            `;
+
+            cartList.appendChild(cartItem);
+        });
+
+        cartTotal.textContent = "$" + total.toFixed(2);
+
+        const removeButtons = document.querySelectorAll(".remove-btn");
+
+        removeButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const index = Number(button.dataset.index);
+                let updatedCart = getCart();
+                updatedCart.splice(index, 1);
+                saveCart(updatedCart);
+                updateCartDisplay();
+                showToast("Item removed from cart");
+            });
+        });
     }
 
+    updateCartDisplay();
+
+    if (buyNowBtn) {
+        buyNowBtn.addEventListener("click", function () {
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const cardNumber = document.getElementById("cardNumber").value.trim();
+            const cardMonth = document.getElementById("cardMonth").value.trim();
+            const cardCvc = document.getElementById("cardCvc").value.trim();
+
+            if (!firstName || !lastName || !address || !cardNumber || !cardMonth || !cardCvc) {
+                showModal("Please fill in all checkout fields before buying.");
+                return;
+            }
+
+            if (getCart().length === 0) {
+                showModal("Your cart is empty.");
+                return;
+            }
+
+            localStorage.removeItem("cart");
+            updateCartDisplay();
+            showModal("Purchase complete! Thank you for shopping with Pump Nation.");
+        });
+    }
+}
+
+//MODAL INTERACTION
+function setupModalEvents() {
+    const closeModalBtn = document.getElementById("closeModal");
+    const modalOkBtn = document.getElementById("modalOkBtn");
+    const modal = document.getElementById("customModal");
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener("click", closeModal);
+    }
+
+    if (modalOkBtn) {
+        modalOkBtn.addEventListener("click", closeModal);
+    }
+
+    if (modal) {
+        modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    }
+}
+
+//CLOSE MENU IF CLICK OUTSIDE
+document.addEventListener("click", function (event) {
+    const sideMenu = document.getElementById("sideMenu");
+    const menuIcon = document.querySelector(".menu-icon");
+
+    if (!sideMenu || !menuIcon) {
+        return;
+    }
+
+    const clickedInsideMenu = sideMenu.contains(event.target);
+    const clickedMenuIcon = menuIcon.contains(event.target);
+
+    if (!clickedInsideMenu && !clickedMenuIcon) {
+        sideMenu.classList.remove("open");
+    }
+});
+
+
+//SETUP
+document.addEventListener("DOMContentLoaded", function () {
+    setupProductButtons();
+    updateIcons();
+    loadProductPage();
+    renderFavouritesPage();
+    renderCartPage();
+    setupModalEvents();
+
+    const pendingToast = localStorage.getItem("cartToast");
+    if (pendingToast) {
+        showToast(pendingToast);
+        localStorage.removeItem("cartToast");
+    }
 });
