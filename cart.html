@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - Pump Nation</title>
+    <title>Cart-Pump Nation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -12,67 +15,93 @@
 <!--BAR&MENU-->
 <header class="topbar">
     <div class="left-section">
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <button class="menu-icon" onclick="toggleMenu()" aria-label="Open menu" aria-controls="sideMenu" aria-expanded="false" type="button">☰</button>
+
+        <div class="search-wrap">
+            <label for="globalSearch" class="sr-only">Search products</label>
+            <input
+                type="text"
+                id="globalSearch"
+                placeholder="Search..."
+                class="search-bar"
+                onkeydown="handleSearchKey(event)"
+                oninput="handleLiveSearch(event)"
+            >
+        </div>
     </div>
 
     <a href="index.html" class="logo">Pump Nation</a>
 
     <div class="right-section">
-        <a href="favourites.html" class="icon-btn">
-            <i class="fa-regular fa-heart"></i>
+        <a href="favourites.html" class="icon-btn" aria-label="Open favourites">
+            <i class="fa-regular fa-heart" aria-hidden="true"></i>
         </a>
-        <a href="cart.html" class="icon-btn">
-            <i class="fa-solid fa-cart-shopping"></i>
+        <a href="cart.html" class="icon-btn" aria-label="Open cart">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
         </a>
     </div>
 </header>
 
-<nav id="sideMenu" class="side-menu">
+<nav id="sideMenu" class="side-menu" aria-label="Main navigation">
+    <a href="index.html">Home</a>
     <a href="gear.html">Gear</a>
     <a href="equipment.html">Equipment</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
 </nav>
 
-<!--CART-->
-<div class="cart-wrapper">
-    <h1 class="cart-title">Cart</h1>
+<!--MAIN-->
+<main id="mainContent">
+    <div class="cart-wrapper">
+        <h1 class="cart-title">Cart</h1>
 
-    <div class="cart-layout">
-        <div class="cart-box" id="cartList">
-            <p class="empty-message">Your cart is empty.</p>
-        </div>
+        <div class="cart-layout">
+            <div class="cart-box" id="cartList">
+                <p class="empty-message">Your cart is empty.</p>
+            </div>
+            <!--CHECKOUT-->
+            <div class="checkout-box">
+                <h2>Checkout</h2>
 
-        <!--CHECKOUT-->
-        <div class="checkout-box">
-            <h2>Checkout</h2>
+                <p>Total: <strong id="cartTotal">$0.00</strong></p>
 
-            <p>Total: <strong id="cartTotal">$0.00</strong></p>
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName">
 
-            <input type="text" id="firstName" placeholder="First Name">
-            <input type="text" id="lastName" placeholder="Last Name">
-            <input type="text" id="address" placeholder="Address">
-            <input type="text" id="cardNumber" placeholder="Card Number">
-            <input type="text" id="cardMonth" placeholder="MM/YY">
-            <input type="text" id="cardCvc" placeholder="CVC">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName">
 
-            <button class="buy-btn" id="buyNowBtn">
-                Buy Now <i class="fa-solid fa-cart-shopping"></i>
-            </button>
+                <label for="address">Address</label>
+                <input type="text" id="address">
+
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber">
+
+                <label for="cardMonth">MM/YY</label>
+                <input type="text" id="cardMonth">
+
+                <label for="cardCvc">CVC</label>
+                <input type="text" id="cardCvc">
+
+                <button class="buy-btn" id="buyNowBtn" type="button">
+                    Buy Now <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </div>
-</div>
+</main>
 
 <!--POPUP-->
-<div id="customModal" class="custom-modal">
+<div id="customModal" class="custom-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalMessage">
     <div class="custom-modal-content">
-        <span class="close-modal" id="closeModal">&times;</span>
+        <button class="close-modal" id="closeModal" type="button" aria-label="Close message">&times;</button>
+        <h2 id="modalTitle">Notice</h2>
         <p id="modalMessage">Message goes here</p>
-        <button id="modalOkBtn" class="modal-btn">OK</button>
+        <button id="modalOkBtn" class="modal-btn" type="button">OK</button>
     </div>
 </div>
 
-<div id="toast" class="toast-message">Added to cart!</div>
+<div id="toast" class="toast-message" aria-live="polite">Added to cart!</div>
 
 <script src="script.js"></script>
 </body>
