@@ -30,13 +30,13 @@ h1, h2, h3, .logo {
     left: 0;
     right: 0;
     z-index: 9999;
-    position: fixed;
 }
 
 .left-section {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
 }
 
 .menu-icon {
@@ -46,11 +46,13 @@ h1, h2, h3, .logo {
     border: none;
     color: white;
     padding: 6px 10px;
+    flex-shrink: 0;
 }
 
 .search-wrap {
     display: flex;
     align-items: center;
+    min-width: 0;
 }
 
 .search-bar {
@@ -59,6 +61,7 @@ h1, h2, h3, .logo {
     border-radius: 5px;
     border: none;
     width: 220px;
+    max-width: 100%;
 }
 
 .logo {
@@ -69,6 +72,7 @@ h1, h2, h3, .logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 .logo:hover {
@@ -79,6 +83,7 @@ h1, h2, h3, .logo {
     display: flex;
     align-items: center;
     gap: 15px;
+    flex-shrink: 0;
 }
 
 .icon-btn {
@@ -852,7 +857,7 @@ h1, h2, h3, .logo {
     display: none !important;
 }
 
-/*MOBILE&TABLET COMP*/
+/* MOBILE&TABLET COMP */
 @media (max-width: 900px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
@@ -882,32 +887,57 @@ h1, h2, h3, .logo {
 @media (max-width: 700px) {
     body,
     .product-page-body {
-        margin-top: 110px;
+        margin-top: 140px;
     }
 
     .topbar {
         flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 12px;
+        row-gap: 10px;
     }
 
-    .left-section,
+    .left-section {
+        order: 1;
+        width: auto;
+        flex: 1 1 auto;
+        justify-content: flex-start;
+        min-width: 0;
+    }
+
     .right-section {
-        width: 100%;
-        justify-content: center;
+        order: 2;
+        width: auto;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-shrink: 0;
     }
 
     .logo {
+        order: 3;
+        position: static;
+        left: auto;
+        transform: none;
         width: 100%;
         text-align: center;
+        font-size: 24px;
+        margin-top: 4px;
     }
 
-    .side-menu {
-        top: 110px;
+    .search-wrap {
+        flex: 1 1 auto;
+        min-width: 0;
     }
 
     .search-bar {
-        width: 180px;
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+    }
+
+    .side-menu {
+        top: 140px;
     }
 
     .grid {
