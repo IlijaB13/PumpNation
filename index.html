@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- TOP BAR -->
+<!--TOPBAR-->
 <header class="topbar">
     <div class="left-section">
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
@@ -16,16 +16,20 @@
     </div>
 
     <a href="index.html" class="logo">
-     Pump Nation
+        Pump Nation
     </a>
 
     <div class="right-section">
-        <button class="icon-btn"><i class="fa-regular fa-heart"></i></button>
-        <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+        <a href="favourites.html" class="icon-btn">
+            <i class="fa-regular fa-heart"></i>
+        </a>
+        <a href="cart.html" class="icon-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
     </div>
 </header>
 
-<!-- SIDE MENU -->
+<!--MENU-->
 <nav id="sideMenu" class="side-menu">
     <a href="gear.html">Gear</a>
     <a href="equipment.html">Equipment</a>
@@ -33,93 +37,120 @@
     <a href="contact.html">Contact</a>
 </nav>
 
-<!--HERO SECTION -->
+<!--SLOGAN-->
 <section class="slogan">
     <h1>Stay Strong. Stay Pumped.</h1>
 </section>
 
-<!-- DEALS SECTION -->
+<!--PRODUCTS-->
 <section class="deals">
     <h2>Deals</h2>
 
     <div class="carousel-container">
-    <button class="arrow left" onclick="scrollProducts(-1)">❮</button>
+        <button class="arrow left" onclick="scrollProducts(-1)">❮</button>
 
-    <div class="products" id="productSlider">
-        
-        <div class="product" onclick="openProduct(1)">
+        <div class="products" id="productSlider">
 
-            <div class="product-img">
-                 <img src="imgs/dumbbells.jpg">
-
-                 <i class="fa-regular fa-heart fav-icon"></i>
-                 <i class="fa-solid fa-cart-shopping cart-icon"></i>
+            <div class="product"
+                 data-id="1"
+                 data-name="15kg Dumbbells"
+                 data-price="49.99"
+                 data-oldprice="80.00"
+                 data-img="imgs/dumbbells.jpg"
+                 onclick="openProduct(1)">
+                <div class="product-img">
+                    <img src="imgs/dumbbells.jpg" alt="15kg Dumbbells">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>15kg Dumbbells</h3>
+                <p class="price"><span class="old-price">$80.00</span> $49.99</p>
             </div>
-            <h3>15kg Dumbbells</h3>
-            <p class="price"><span class="old-price">$80.00</span> $49.99</p>
+
+            <div class="product"
+                 data-id="2"
+                 data-name="Resistance Bands"
+                 data-price="14.99"
+                 data-oldprice="30.00"
+                 data-img="imgs/bands.jpg"
+                 onclick="openProduct(2)">
+                <div class="product-img">
+                    <img src="imgs/bands.jpg" alt="Resistance Bands">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Resistance Bands</h3>
+                <p class="price"><span class="old-price">$30.00</span> $14.99</p>
+            </div>
+
+            <div class="product"
+                 data-id="3"
+                 data-name="Workout Gloves"
+                 data-price="12.00"
+                 data-oldprice="25.00"
+                 data-img="imgs/gloves.jpg"
+                 onclick="openProduct(3)">
+                <div class="product-img">
+                    <img src="imgs/gloves.jpg" alt="Workout Gloves">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Workout Gloves</h3>
+                <p class="price"><span class="old-price">$25.00</span> $12.00</p>
+            </div>
+
+            <div class="product"
+                 data-id="4"
+                 data-name="Protein Shaker"
+                 data-price="7.00"
+                 data-oldprice="14.99"
+                 data-img="imgs/shaker.jpg"
+                 onclick="openProduct(4)">
+                <div class="product-img">
+                    <img src="imgs/shaker.jpg" alt="Protein Shaker">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Protein Shaker</h3>
+                <p class="price"><span class="old-price">$14.99</span> $7.00</p>
+            </div>
+
+            <div class="product"
+                 data-id="5"
+                 data-name="Yoga Mat"
+                 data-price="19.99"
+                 data-oldprice="40.00"
+                 data-img="imgs/mat.jpg"
+                 onclick="openProduct(5)">
+                <div class="product-img">
+                    <img src="imgs/mat.jpg" alt="Yoga Mat">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Yoga Mat</h3>
+                <p class="price"><span class="old-price">$40.00</span> $19.99</p>
+            </div>
+
+            <div class="product"
+                 data-id="6"
+                 data-name="Jump Rope"
+                 data-price="9.99"
+                 data-oldprice="20.00"
+                 data-img="imgs/rope.jpg"
+                 onclick="openProduct(6)">
+                <div class="product-img">
+                    <img src="imgs/rope.jpg" alt="Jump Rope">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+                <h3>Jump Rope</h3>
+                <p class="price"><span class="old-price">$20.00</span> $9.99</p>
+            </div>
+
         </div>
 
-        <div class="product" onclick="openProduct(2)">
-            <div class="product-img">
-                 <img src="imgs/bands.jpg">
-
-                 <i class="fa-regular fa-heart fav-icon"></i>
-                 <i class="fa-solid fa-cart-shopping cart-icon"></i>
-            </div>
-            <h3>Resistance Bands</h3>
-            <p class="price"><span class="old-price">$30.00</span> $14.99</p>
-        </div>
-
-        <div class="product" onclick="openProduct(3)">
-            <div class="product-img">
-                 <img src="imgs/gloves.jpg">
-
-                 <i class="fa-regular fa-heart fav-icon"></i>
-                 <i class="fa-solid fa-cart-shopping cart-icon"></i>
-            </div>
-            <h3>Workout Gloves</h3>
-            <p class="price"><span class="old-price">$25.00</span> $12.00</p>
-        </div>
-
-        <div class="product" onclick="openProduct(4)">
-           <div class="product-img">
-                 <img src="imgs/shaker.jpg">
-
-                 <i class="fa-regular fa-heart fav-icon"></i>
-                 <i class="fa-solid fa-cart-shopping cart-icon"></i>
-            </div>
-            <h3>Protein Shaker</h3>
-            <p class="price"><span class="old-price">$14.99</span> $7.00</p>
-        </div>
-
-        <div class="product" onclick="openProduct(5)">
-            <div class="product-img">
-                 <img src="imgs/mat.jpg">
-
-                 <i class="fa-regular fa-heart fav-icon"></i>
-                 <i class="fa-solid fa-cart-shopping cart-icon"></i>
-            </div>
-            <h3>Yoga Mat</h3>
-            <p class="price"><span class="old-price">$40.00</span> $19.99</p>
-        </div>
-
-        <!-- EXTRA (hidden until scroll) -->
-        <div class="product" onclick="openProduct(6)">
-           <div class="product-img">
-                 <img src="imgs/rope.jpg">
-
-                 <i class="fa-regular fa-heart fav-icon"></i>
-                 <i class="fa-solid fa-cart-shopping cart-icon"></i>
-            </div>
-            <h3>Jump Rope</h3>
-            <p class="price"><span class="old-price">$20.00</span> $9.99</p>
-        </div>
-
+        <button class="arrow right" onclick="scrollProducts(1)">❯</button>
     </div>
-
-    <button class="arrow left" onclick="scrollProducts(-1)">❮</button>
-    <button class="arrow right" onclick="scrollProducts(1)">❯</button>
-</div>
 </section>
 
 <script src="script.js"></script>
