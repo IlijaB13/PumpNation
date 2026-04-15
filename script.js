@@ -1,12 +1,19 @@
 //MENU
 function toggleMenu() {
     const sideMenu = document.getElementById("sideMenu");
+    const menuButton = document.querySelector(".menu-icon");
+
     if (sideMenu) {
         sideMenu.classList.toggle("open");
+
+        if (menuButton) {
+            const expanded = sideMenu.classList.contains("open");
+            menuButton.setAttribute("aria-expanded", expanded ? "true" : "false");
+        }
     }
 }
 
-//READ PRODCUTS&SAVE TO FAVOURITES&CART
+//STORAGE
 function getFavourites() {
     return JSON.parse(localStorage.getItem("favourites")) || [];
 }
@@ -29,6 +36,108 @@ function getSelectedProduct() {
 
 function saveSelectedProduct(product) {
     localStorage.setItem("selectedProduct", JSON.stringify(product));
+}
+
+//PRODUCT DETAILS
+function getProductDetails(productId) {
+    const productInfo = {
+        1: {
+            desc: "Heavy-duty 15kg dumbbells for strength training, home workouts, and steady progress. Strong grip, simple design, and made for serious sessions.",
+            type: "equipment",
+            alt: "15 kilogram dumbbells for strength training"
+        },
+        2: {
+            desc: "Resistance bands for stretching, strength work, and mobility exercises. Easy to carry and useful for warmups or full workouts.",
+            type: "equipment",
+            alt: "Resistance bands for stretching and strength training"
+        },
+        3: {
+            desc: "Workout gloves for better grip and hand protection during lifting. Comfortable to wear and useful for longer training sessions.",
+            type: "equipment",
+            alt: "Workout gloves for grip and hand protection"
+        },
+        4: {
+            desc: "Protein shaker bottle for smooth mixing before or after workouts. Simple, practical, and easy to use every day.",
+            type: "equipment",
+            alt: "Protein shaker bottle"
+        },
+        5: {
+            desc: "Comfortable yoga mat for stretching, yoga, and floor exercises. A reliable option for home training and recovery work.",
+            type: "equipment",
+            alt: "Yoga mat for stretching and floor exercises"
+        },
+        6: {
+            desc: "Jump rope for cardio, warmups, and endurance training. A classic tool for quick, effective conditioning.",
+            type: "equipment",
+            alt: "Jump rope for cardio workouts"
+        },
+        7: {
+            desc: "Lightweight windbreaker for training outdoors in cooler weather. Comfortable, practical, and easy to layer.",
+            type: "clothing",
+            alt: "Windbreaker jacket for outdoor workouts"
+        },
+        8: {
+            desc: "Flexible women's leggings designed for comfort and movement. Good for training, stretching, and everyday active wear.",
+            type: "clothing",
+            alt: "Women's leggings for training and exercise"
+        },
+        9: {
+            desc: "Breathable t-shirt for training or everyday casual wear. Simple athletic fit and comfortable material.",
+            type: "clothing",
+            alt: "Athletic t-shirt for workouts"
+        },
+        10: {
+            desc: "Running shoes built for comfort, grip, and daily training support. Great for active days and regular workouts.",
+            type: "shoes",
+            alt: "Running shoes for training and everyday workouts"
+        },
+        11: {
+            desc: "Premium running shoes with extra support and cushioning. Designed to feel light while still giving good support.",
+            type: "shoes",
+            alt: "Premium running shoes"
+        },
+        12: {
+            desc: "Women's tank top made for workouts, layering, and comfort. A simple and breathable option for training.",
+            type: "clothing",
+            alt: "Women's tank top for workouts"
+        },
+        13: {
+            desc: "5kg dumbbells for beginner strength training and toning sessions. Easy to use and great for lighter workouts.",
+            type: "equipment",
+            alt: "5 kilogram dumbbells"
+        },
+        14: {
+            desc: "10kg dumbbells for intermediate training and home gym workouts. A strong choice for regular strength work.",
+            type: "equipment",
+            alt: "10 kilogram dumbbells"
+        },
+        15: {
+            desc: "20kg dumbbells for heavier strength and resistance training. Best for more challenging lifts and stronger sessions.",
+            type: "equipment",
+            alt: "20 kilogram dumbbells"
+        },
+        16: {
+            desc: "Strong barbell bar for compound lifts and serious training sessions. A good core piece for a home gym setup.",
+            type: "equipment",
+            alt: "Barbell bar for strength training"
+        },
+        17: {
+            desc: "12kg kettlebell for swings, squats, presses, and full-body training. A versatile choice for many exercises.",
+            type: "equipment",
+            alt: "12 kilogram kettlebell"
+        },
+        18: {
+            desc: "Multi-functional bench for presses, seated work, and home gym setups. Useful for adding more exercise options.",
+            type: "equipment",
+            alt: "Multi-functional workout bench"
+        }
+    };
+
+    return productInfo[productId] || {
+        desc: "No description available.",
+        type: "equipment",
+        alt: "Product image"
+    };
 }
 
 //POPUP
@@ -61,55 +170,24 @@ function showToast(message) {
     }, 2000);
 }
 
-
-//PRODUCT CHECKS FAV&CART
+//CHECKS
 function isFavourite(productId) {
     const favourites = getFavourites();
     return favourites.some(function (item) {
-        return item.id === productId;
+        return item.id === String(productId);
     });
 }
 
 function isInCart(productId) {
     const cart = getCart();
     return cart.some(function (item) {
-        return item.id === productId;
+        return item.id === String(productId);
     });
 }
 
-//ALL PRODUCTS
-function getProductDetails(productId) {
-    const productInfo = {
-        1: { desc: "Heavy-duty 15kg dumbbells for strength training and home workouts.", type: "equipment" },
-        2: { desc: "Resistance bands for stretching, strength work, and mobility exercises.", type: "equipment" },
-        3: { desc: "Workout gloves for better grip and hand protection during lifting.", type: "equipment" },
-        4: { desc: "Protein shaker bottle for smooth mixing before or after workouts.", type: "equipment" },
-        5: { desc: "Comfortable yoga mat for stretching, yoga, and floor exercises.", type: "equipment" },
-        6: { desc: "Jump rope for cardio, warmups, and endurance training.", type: "equipment" },
-        7: { desc: "Lightweight windbreaker for training outdoors in cooler weather.", type: "clothing" },
-        8: { desc: "Flexible women's leggings designed for comfort and movement.", type: "clothing" },
-        9: { desc: "Breathable t-shirt for training or everyday casual wear.", type: "clothing" },
-        10: { desc: "Running shoes built for comfort, grip, and daily training support.", type: "shoes" },
-        11: { desc: "Premium running shoes with extra support and cushioning.", type: "shoes" },
-        12: { desc: "Women's tank top made for workouts, layering, and comfort.", type: "clothing" },
-        13: { desc: "5kg dumbbells for beginner strength training and toning sessions.", type: "equipment" },
-        14: { desc: "10kg dumbbells for intermediate training and home gym workouts.", type: "equipment" },
-        15: { desc: "20kg dumbbells for heavier strength and resistance training.", type: "equipment" },
-        16: { desc: "Strong barbell bar for compound lifts and serious training sessions.", type: "equipment" },
-        17: { desc: "12kg kettlebell for swings, squats, presses, and full-body training.", type: "equipment" },
-        18: { desc: "Multi-functional bench for presses, seated work, and home gym setups.", type: "equipment" }
-    };
-
-    return productInfo[productId] || {
-        desc: "No description available.",
-        type: "equipment"
-    };
-}
-
-//SIZE POPUP
+//OPEN PRODUCT
 function openProduct(productId, showSizeMessage) {
     const product = document.querySelector('.product[data-id="' + productId + '"]');
-
     if (!product) return;
 
     const productData = {
@@ -117,7 +195,8 @@ function openProduct(productId, showSizeMessage) {
         name: product.dataset.name,
         price: product.dataset.price,
         oldPrice: product.dataset.oldprice || "",
-        img: product.dataset.img
+        img: product.dataset.img,
+        alt: product.dataset.alt || product.dataset.name
     };
 
     saveSelectedProduct(productData);
@@ -149,59 +228,72 @@ function scrollProducts(direction) {
 //ADD TO CART
 function addToCart(productData) {
     let cart = getCart();
-    cart.push(productData);
+
+    const existing = cart.find(function (item) {
+        return item.id === productData.id && item.size === productData.size;
+    });
+
+    if (existing) {
+        existing.quantity = (existing.quantity || 1) + (productData.quantity || 1);
+    } else {
+        productData.quantity = productData.quantity || 1;
+        cart.push(productData);
+    }
+
     saveCart(cart);
 }
 
-//UPDATE FAV&CART
+//UPDATE ICONS
 function updateIcons() {
     const products = document.querySelectorAll(".product");
 
     products.forEach(function (product) {
         const productId = product.dataset.id;
-        const heartIcon = product.querySelector(".fav-icon");
-        const cartIcon = product.querySelector(".cart-icon");
+        const heartBtn = product.querySelector(".fav-icon");
+        const cartBtn = product.querySelector(".cart-icon");
+        const heartIcon = heartBtn ? heartBtn.querySelector("i") : null;
 
-        if (heartIcon) {
+        if (heartBtn && heartIcon) {
             if (isFavourite(productId)) {
+                heartBtn.classList.add("active-fav");
                 heartIcon.classList.remove("fa-regular");
                 heartIcon.classList.add("fa-solid");
-                heartIcon.style.color = "red";
             } else {
+                heartBtn.classList.remove("active-fav");
                 heartIcon.classList.remove("fa-solid");
                 heartIcon.classList.add("fa-regular");
-                heartIcon.style.color = "";
             }
         }
 
-        if (cartIcon) {
+        if (cartBtn) {
             if (isInCart(productId)) {
-                cartIcon.classList.add("active-cart");
+                cartBtn.classList.add("active-cart");
             } else {
-                cartIcon.classList.remove("active-cart");
+                cartBtn.classList.remove("active-cart");
             }
         }
     });
 }
 
-//FAV&CART CLICKABLES
+//BUTTONS
 function setupProductButtons() {
     const products = document.querySelectorAll(".product");
 
     products.forEach(function (product) {
-        const heartIcon = product.querySelector(".fav-icon");
-        const cartIcon = product.querySelector(".cart-icon");
+        const heartBtn = product.querySelector(".fav-icon");
+        const cartBtn = product.querySelector(".cart-icon");
 
         const productData = {
             id: product.dataset.id,
             name: product.dataset.name,
             price: product.dataset.price,
             oldPrice: product.dataset.oldprice || "",
-            img: product.dataset.img
+            img: product.dataset.img,
+            alt: product.dataset.alt || product.dataset.name
         };
 
-        if (heartIcon) {
-            heartIcon.addEventListener("click", function (event) {
+        if (heartBtn) {
+            heartBtn.addEventListener("click", function (event) {
                 event.stopPropagation();
 
                 let favourites = getFavourites();
@@ -214,19 +306,19 @@ function setupProductButtons() {
                         return item.id !== productData.id;
                     });
                     saveFavourites(favourites);
-                    updateIcons();
                     showToast("Removed from favourites");
                 } else {
                     favourites.push(productData);
                     saveFavourites(favourites);
-                    updateIcons();
                     showToast("Added to favourites");
                 }
+
+                updateIcons();
             });
         }
 
-        if (cartIcon) {
-            cartIcon.addEventListener("click", function (event) {
+        if (cartBtn) {
+            cartBtn.addEventListener("click", function (event) {
                 event.stopPropagation();
 
                 const details = getProductDetails(Number(productData.id));
@@ -242,7 +334,9 @@ function setupProductButtons() {
                     price: productData.price,
                     oldPrice: productData.oldPrice,
                     img: productData.img,
-                    size: ""
+                    alt: productData.alt,
+                    size: "",
+                    quantity: 1
                 });
 
                 localStorage.setItem("cartToast", "Added to cart!");
@@ -252,7 +346,7 @@ function setupProductButtons() {
     });
 }
 
-//PRODUCT PG
+//PRODUCT PAGE
 function loadProductPage() {
     const productName = document.getElementById("productName");
     const productImg = document.getElementById("productImg");
@@ -278,7 +372,7 @@ function loadProductPage() {
 
     productName.textContent = selectedProduct.name;
     productImg.src = selectedProduct.img;
-    productImg.alt = selectedProduct.name;
+    productImg.alt = details.alt;
     productDesc.textContent = details.desc;
 
     if (selectedProduct.oldPrice) {
@@ -333,21 +427,22 @@ function loadProductPage() {
             }
         }
 
-        const cartItem = {
+        addToCart({
             id: selectedProduct.id,
             name: selectedProduct.name,
             price: selectedProduct.price,
             oldPrice: selectedProduct.oldPrice || "",
             img: selectedProduct.img,
-            size: chosenSize
-        };
+            alt: selectedProduct.alt || details.alt,
+            size: chosenSize,
+            quantity: 1
+        });
 
-        addToCart(cartItem);
         showToast("Added to cart!");
     });
 }
 
-//FAVOURITES PG
+//FAVOURITES PAGE
 function renderFavouritesPage() {
     const favoritesList = document.getElementById("favoritesList");
     const addSelectedBtn = document.getElementById("addSelectedToCart");
@@ -370,14 +465,15 @@ function renderFavouritesPage() {
         favItem.className = "fav-item";
 
         favItem.innerHTML = `
-            <div class="fav-left">
+            <label class="fav-row">
                 <input type="checkbox" class="fav-check" data-index="${index}">
-                <img src="${item.img}" alt="${item.name}">
+                <img src="${item.img}" alt="${item.alt || item.name}">
                 <div class="fav-info">
                     <h3>${item.name}</h3>
-                    <p class="price">$${Number(item.price).toFixed(2)}</p>
+                    <p>$${Number(item.price).toFixed(2)}</p>
                 </div>
-            </div>
+                <div class="fav-price">$${Number(item.price).toFixed(2)}</div>
+            </label>
         `;
 
         favoritesList.appendChild(favItem);
@@ -390,8 +486,6 @@ function renderFavouritesPage() {
             showModal("Please select at least one favourite item.");
             return;
         }
-
-        let cart = getCart();
 
         for (let checkbox of checkedBoxes) {
             const index = checkbox.dataset.index;
@@ -406,23 +500,24 @@ function renderFavouritesPage() {
                 return;
             }
 
-            cart.push({
+            addToCart({
                 id: item.id,
                 name: item.name,
                 price: item.price,
                 oldPrice: item.oldPrice || "",
                 img: item.img,
-                size: ""
+                alt: item.alt || item.name,
+                size: "",
+                quantity: 1
             });
         }
 
-        saveCart(cart);
         localStorage.setItem("cartToast", "Selected items added to cart!");
         window.location.href = "cart.html";
     };
 }
 
-//CART PG
+//CART PAGE
 function renderCartPage() {
     const cartList = document.getElementById("cartList");
     const cartTotal = document.getElementById("cartTotal");
@@ -430,10 +525,8 @@ function renderCartPage() {
 
     if (!cartList || !cartTotal) return;
 
-    let cart = getCart();
-
     function updateCartDisplay() {
-        cart = getCart();
+        let cart = getCart();
 
         if (cart.length === 0) {
             cartList.innerHTML = '<p class="empty-message">Your cart is empty.</p>';
@@ -445,23 +538,31 @@ function renderCartPage() {
         let total = 0;
 
         cart.forEach(function (item, index) {
-            total += Number(item.price);
+            const quantity = item.quantity || 1;
+            total += Number(item.price) * quantity;
 
             const cartItem = document.createElement("div");
             cartItem.className = "cart-item";
 
             cartItem.innerHTML = `
                 <div class="cart-left">
-                    <img src="${item.img}" alt="${item.name}">
+                    <img src="${item.img}" alt="${item.alt || item.name}">
                     <div class="cart-info">
                         <h3>${item.name}</h3>
                         <p>${item.size ? "Size: " + item.size : "No size needed"}</p>
                     </div>
                 </div>
 
-                <div class="fav-right">
-                    <div class="cart-price">$${Number(item.price).toFixed(2)}</div>
-                    <button class="remove-btn" data-index="${index}">&times;</button>
+                <div class="cart-right">
+                    <div class="cart-price">$${(Number(item.price) * quantity).toFixed(2)}</div>
+
+                    <div class="qty-controls">
+                        <button class="qty-btn decrease-btn" type="button" data-index="${index}" aria-label="Decrease quantity">-</button>
+                        <span class="qty-value">${quantity}</span>
+                        <button class="qty-btn increase-btn" type="button" data-index="${index}" aria-label="Increase quantity">+</button>
+                    </div>
+
+                    <button class="remove-btn" data-index="${index}" type="button">Remove</button>
                 </div>
             `;
 
@@ -471,7 +572,6 @@ function renderCartPage() {
         cartTotal.textContent = "$" + total.toFixed(2);
 
         const removeButtons = document.querySelectorAll(".remove-btn");
-
         removeButtons.forEach(function (button) {
             button.addEventListener("click", function () {
                 const index = Number(button.dataset.index);
@@ -480,6 +580,35 @@ function renderCartPage() {
                 saveCart(updatedCart);
                 updateCartDisplay();
                 showToast("Item removed from cart");
+            });
+        });
+
+        const increaseButtons = document.querySelectorAll(".increase-btn");
+        increaseButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const index = Number(button.dataset.index);
+                let updatedCart = getCart();
+                updatedCart[index].quantity = (updatedCart[index].quantity || 1) + 1;
+                saveCart(updatedCart);
+                updateCartDisplay();
+            });
+        });
+
+        const decreaseButtons = document.querySelectorAll(".decrease-btn");
+        decreaseButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const index = Number(button.dataset.index);
+                let updatedCart = getCart();
+                const currentQty = updatedCart[index].quantity || 1;
+
+                if (currentQty > 1) {
+                    updatedCart[index].quantity = currentQty - 1;
+                } else {
+                    updatedCart.splice(index, 1);
+                }
+
+                saveCart(updatedCart);
+                updateCartDisplay();
             });
         });
     }
@@ -512,7 +641,68 @@ function renderCartPage() {
     }
 }
 
-//MODAL INTERACTION
+//SEARCH BAR
+function searchCurrentPage(query) {
+    const products = document.querySelectorAll(".product");
+    const message = document.getElementById("searchResultsMessage");
+    const searchText = query.trim().toLowerCase();
+    let found = 0;
+
+    if (!products.length) return false;
+
+    products.forEach(function (product) {
+        const name = product.dataset.name.toLowerCase();
+
+        if (name.includes(searchText) || searchText === "") {
+            product.classList.remove("hidden-product");
+            found++;
+        } else {
+            product.classList.add("hidden-product");
+        }
+    });
+
+    if (message) {
+        if (searchText === "") {
+            message.textContent = "";
+        } else if (found === 0) {
+            message.textContent = "No results";
+        } else {
+            message.textContent = "";
+        }
+    }
+
+    return true;
+}
+
+function handleLiveSearch(event) {
+    const query = event.target.value;
+    searchCurrentPage(query);
+}
+
+function handleSearchKey(event) {
+    if (event.key !== "Enter") return;
+
+    const query = event.target.value.trim();
+    const workedOnCurrentPage = searchCurrentPage(query);
+
+    if (!workedOnCurrentPage && query !== "") {
+        localStorage.setItem("searchQuery", query);
+        window.location.href = "index.html";
+    }
+}
+
+function applySavedSearch() {
+    const savedQuery = localStorage.getItem("searchQuery");
+    const input = document.getElementById("globalSearch");
+
+    if (savedQuery && input) {
+        input.value = savedQuery;
+        searchCurrentPage(savedQuery);
+        localStorage.removeItem("searchQuery");
+    }
+}
+
+//MODAL THINGS
 function setupModalEvents() {
     const closeModalBtn = document.getElementById("closeModal");
     const modalOkBtn = document.getElementById("modalOkBtn");
@@ -533,9 +723,15 @@ function setupModalEvents() {
             }
         });
     }
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
 }
 
-//CLOSE MENU IF CLICK OUTSIDE
+//CLOSE MENU
 document.addEventListener("click", function (event) {
     const sideMenu = document.getElementById("sideMenu");
     const menuIcon = document.querySelector(".menu-icon");
@@ -549,11 +745,11 @@ document.addEventListener("click", function (event) {
 
     if (!clickedInsideMenu && !clickedMenuIcon) {
         sideMenu.classList.remove("open");
+        menuIcon.setAttribute("aria-expanded", "false");
     }
 });
 
-
-//SETUP
+//STARTUP
 document.addEventListener("DOMContentLoaded", function () {
     setupProductButtons();
     updateIcons();
@@ -561,6 +757,7 @@ document.addEventListener("DOMContentLoaded", function () {
     renderFavouritesPage();
     renderCartPage();
     setupModalEvents();
+    applySavedSearch();
 
     const pendingToast = localStorage.getItem("cartToast");
     if (pendingToast) {
