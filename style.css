@@ -2,8 +2,19 @@
 body {
     margin: 0;
     margin-top: 60px;
-    font-family: Arial, sans-serif;
+    font-family: "Manrope", Arial, sans-serif;
     overflow-x: hidden;
+    background: #f4f6f8;
+}
+
+h1, h2, h3, .logo {
+    font-family: "Oswald", Arial, sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.sr-only {
+    position: absolute;
+    left: -9999px;
 }
 
 .topbar {
@@ -12,25 +23,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
+    min-height: 60px;
     padding: 0 20px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 9999;
-}
-
-.menu-icon {
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.search-bar {
-    margin-left: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    border: none;
+    position: fixed;
 }
 
 .left-section {
@@ -39,11 +39,36 @@ body {
     gap: 10px;
 }
 
-.logo {
+.menu-icon {
     font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+}
+
+.search-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    margin-left: 10px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: none;
+    width: 220px;
+}
+
+.logo {
+    font-size: 28px;
     font-weight: bold;
     text-decoration: none;
     color: white;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .logo:hover {
@@ -56,15 +81,8 @@ body {
     gap: 15px;
 }
 
-.right-section button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
 .icon-btn {
-    all: unset;
-    cursor: pointer;
+    text-decoration: none;
     width: 40px;
     height: 40px;
     display: flex;
@@ -83,11 +101,10 @@ body {
 
 .side-menu {
     position: fixed;
-    left: -200px;
+    left: -220px;
     top: 60px;
     bottom: 0;
-    width: 200px;
-    height: calc(100vh - 60px);
+    width: 220px;
     background: #1365bb;
     transition: left 0.3s;
     z-index: 999;
@@ -106,22 +123,39 @@ body {
 
 .side-menu a:hover {
     background: orange;
+    color: black;
 }
 
 .slogan {
     height: 300px;
-    background: url('imgs/gymbkg.jpg') center/cover no-repeat;
+    background:
+        linear-gradient(to left, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.15)),
+        url('imgs/gymbkg.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 36px;
+    text-align: center;
+    padding: 20px;
+}
+
+.slogan h1 {
+    font-size: 42px;
     font-weight: bold;
+    margin: 0;
 }
 
 .deals {
     padding: 20px;
     text-align: center;
+    background: #f4f6f8;
+}
+
+.search-results-message {
+    min-height: 24px;
+    color: #cc0000;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .carousel-container {
@@ -129,7 +163,7 @@ body {
     display: flex;
     align-items: center;
     overflow: visible;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -147,8 +181,12 @@ body {
     border-radius: 10px;
     padding: 10px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
     cursor: pointer;
+}
+
+.grid .product {
+    color: black;
 }
 
 .product-img {
@@ -157,11 +195,12 @@ body {
 
 .product img {
     width: 100%;
-    height: 120px;
+    height: 140px;
     object-fit: cover;
     border-radius: 8px;
 }
 
+/*ICONS*/
 .fav-icon,
 .cart-icon {
     position: absolute;
@@ -169,8 +208,8 @@ body {
     border-radius: 50%;
     padding: 8px;
     font-size: 16px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    border: 1px solid #ddd;
 }
 
 .fav-icon {
@@ -190,6 +229,14 @@ body {
 }
 
 .cart-icon:hover {
+    color: #258cfb;
+}
+
+.fav-icon.active-fav {
+    color: red;
+}
+
+.cart-icon.active-cart {
     color: #258cfb;
 }
 
@@ -220,18 +267,18 @@ body {
 }
 
 .arrow.left {
-    left: -30px;
+    left: -20px;
 }
 
 .arrow.right {
-    right: -30px;
+    right: -20px;
 }
 
 .arrow:hover {
     background: #1365bb;
 }
 
-/*GEAR&EQUIPMENT*/
+/*EQUIPMENT&GEAR*/
 .equipment-bg {
     min-height: 100vh;
     position: relative;
@@ -258,78 +305,15 @@ body {
     margin-top: 20px;
 }
 
-.product {
-    background: white;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    position: relative;
-    cursor: pointer;
-}
-
-.product-img {
-    position: relative;
-}
-
-.product img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.fav-icon,
-.cart-icon {
-    position: absolute;
-    font-size: 18px;
-    padding: 8px;
-    border-radius: 50%;
-    cursor: pointer;
-    opacity: 0;
-    transition: 0.3s;
-}
-
-.fav-icon {
-    top: 10px;
-    right: 10px;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.cart-icon {
-    bottom: 10px;
-    right: 10px;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.product:hover .fav-icon,
-.product:hover .cart-icon {
-    opacity: 1;
-}
-
-.fav-icon.fa-solid {
-    opacity: 1;
-    color: red !important;
-}
-
-.cart-icon.active-cart {
-    opacity: 1;
-    background: #258cfb;
-    color: white !important;
-}
-
-/*PRODUCT PG*/
+/*PRODUCTS*/
 .product-page-body {
     background: url("imgs/gymbkg.jpg") center/cover no-repeat fixed;
     margin: 0;
     margin-top: 60px;
-    font-family: Arial, sans-serif;
+    font-family: "Manrope", Arial, sans-serif;
     position: relative;
 }
 
-/*overlay*/
 .product-page-body::before {
     content: "";
     position: fixed;
@@ -354,7 +338,6 @@ body {
     border-radius: 15px;
     width: 900px;
     max-width: 100%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .left-side {
@@ -384,7 +367,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .desc-box {
@@ -392,7 +375,8 @@ body {
     padding: 20px;
     border-radius: 10px;
     color: black;
-    line-height: 1.6;
+    line-height: 1.7;
+    text-align: center;
 }
 
 .size-container {
@@ -424,20 +408,10 @@ body {
     border-radius: 8px;
     cursor: pointer;
     margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
 }
 
 .add-cart:hover {
     background: #1f6ed4;
-}
-
-.old-price {
-    text-decoration: line-through;
-    color: red;
-    margin-right: 8px;
 }
 
 /*FAVOURITES PG*/
@@ -461,8 +435,6 @@ body {
     max-width: 100%;
     border-radius: 12px;
     padding: 20px;
-    max-height: 60vh;
-    overflow-y: auto;
 }
 
 .favorites-box p {
@@ -472,21 +444,19 @@ body {
 }
 
 .fav-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     border-bottom: 1px solid #ddd;
-    padding: 15px 0;
 }
 
-.fav-left {
-    display: flex;
+.fav-row {
+    display: grid;
+    grid-template-columns: 30px 80px 1fr auto;
     align-items: center;
     gap: 15px;
-    flex: 1;
+    padding: 15px 0;
+    cursor: pointer;
 }
 
-.fav-left img {
+.fav-row img {
     width: 80px;
     height: 80px;
     object-fit: cover;
@@ -494,8 +464,6 @@ body {
 }
 
 .fav-info {
-    display: flex;
-    flex-direction: column;
     color: black;
 }
 
@@ -503,25 +471,22 @@ body {
     margin: 0 0 5px 0;
 }
 
-.fav-info .price {
+.fav-info p {
+    margin: 0;
     color: #666;
-    font-size: 14px;
-}
-
-.fav-info .size {
-    font-size: 12px;
-    color: #999;
+    font-style: normal;
+    text-align: left;
 }
 
 .fav-check {
     width: 20px;
     height: 20px;
     accent-color: #258cfb;
-    margin-right: 10px;
 }
 
-.fav-check:checked {
-    background-color: #258cfb;
+.fav-price {
+    font-weight: bold;
+    color: black;
 }
 
 .add-cart-fav {
@@ -568,19 +533,20 @@ body {
 }
 
 .about h1 {
-    font-size: 40px;
+    font-size: 48px;
     margin-bottom: 10px;
 }
 
 .tagline {
-    font-size: 18px;
-    color: #ccc;
+    font-size: 20px;
+    color: #ddd;
     margin-bottom: 20px;
+    font-weight: 500;
 }
 
 .about p {
     margin-bottom: 15px;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .about ul {
@@ -623,7 +589,7 @@ body {
 }
 
 .contact-left h1 {
-    font-size: 36px;
+    font-size: 40px;
     margin-bottom: 10px;
 }
 
@@ -656,7 +622,6 @@ body {
     width: 80%;
     height: 80%;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 /*CART PG*/
@@ -710,27 +675,48 @@ body {
     border-radius: 8px;
 }
 
-.cart-info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
 .cart-info h3 {
     margin: 0;
     font-size: 18px;
 }
 
 .cart-info p {
-    margin: 0;
+    margin: 5px 0 0 0;
     color: #666;
+}
+
+.cart-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
 }
 
 .cart-price {
     font-weight: bold;
     color: black;
-    min-width: 80px;
-    text-align: right;
+}
+
+.qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: #258cfb;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.qty-value {
+    min-width: 20px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .remove-btn {
@@ -740,23 +726,11 @@ body {
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 18px;
-    line-height: 1;
+    font-size: 14px;
 }
 
 .remove-btn:hover {
     background: rgb(174, 90, 0);
-}
-
-.fav-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.item-price {
-    font-weight: bold;
-    color: black;
 }
 
 .checkout-box {
@@ -768,12 +742,19 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    text-align: left;
+}
+
+.checkout-box label {
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .checkout-box input {
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #ccc;
+    font-size: 16px;
 }
 
 .buy-btn {
@@ -795,7 +776,7 @@ body {
     font-style: italic;
 }
 
-/*POPUP*/
+/*POPUPS*/
 .custom-modal {
     display: none;
     position: fixed;
@@ -820,7 +801,6 @@ body {
     width: 100%;
     text-align: center;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .close-modal {
@@ -829,6 +809,8 @@ body {
     right: 15px;
     font-size: 24px;
     cursor: pointer;
+    border: none;
+    background: none;
 }
 
 .modal-btn {
@@ -853,7 +835,6 @@ body {
     color: white;
     padding: 14px 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     opacity: 0;
     pointer-events: none;
     transform: translateY(20px);
@@ -865,4 +846,114 @@ body {
 .toast-message.show {
     opacity: 1;
     transform: translateY(0);
+}
+
+.hidden-product {
+    display: none !important;
+}
+
+/*MOBILE&TABLET COMP*/
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product {
+        min-width: calc(50% - 10px);
+    }
+
+    .product-box,
+    .contact-container,
+    .cart-layout {
+        flex-direction: column;
+    }
+
+    .cart-box,
+    .checkout-box {
+        width: 100%;
+    }
+
+    .contact-right iframe {
+        width: 100%;
+        height: 300px;
+    }
+}
+
+@media (max-width: 700px) {
+    body,
+    .product-page-body {
+        margin-top: 110px;
+    }
+
+    .topbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .side-menu {
+        top: 110px;
+    }
+
+    .search-bar {
+        width: 180px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product {
+        min-width: 100%;
+    }
+
+    .products {
+        overflow-x: auto;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .fav-row {
+        grid-template-columns: 30px 60px 1fr;
+    }
+
+    .fav-price {
+        grid-column: 2 / 4;
+        margin-left: 0;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-right {
+        align-items: flex-start;
+    }
+
+    .about h1,
+    .contact-left h1,
+    .slogan h1 {
+        font-size: 32px;
+    }
+
+    .equipment,
+    .cart-wrapper,
+    .favorites-wrapper,
+    .product-wrapper {
+        padding: 20px;
+    }
 }
