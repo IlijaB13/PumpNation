@@ -2,140 +2,187 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipment-PumpNation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-<!--BAR&MENU-->
+<!--BAR&MENU--> 
 <header class="topbar">
     <div class="left-section">
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <input type="text" placeholder="Search..." class="search-bar">
+        <button class="menu-icon" onclick="toggleMenu()" aria-label="Open menu" aria-controls="sideMenu" aria-expanded="false" type="button">☰</button>
+
+        <div class="search-wrap">
+            <label for="globalSearch" class="sr-only">Search products</label>
+            <input
+                type="text"
+                id="globalSearch"
+                placeholder="Search..."
+                class="search-bar"
+                onkeydown="handleSearchKey(event)"
+                oninput="handleLiveSearch(event)"
+            >
+        </div>
     </div>
 
-    <a href="index.html" class="logo">
-        Pump Nation
-    </a>
+    <a href="index.html" class="logo">Pump Nation</a>
 
     <div class="right-section">
-        <a href="favourites.html" class="icon-btn">
-            <i class="fa-regular fa-heart"></i>
+        <a href="favourites.html" class="icon-btn" aria-label="Open favourites">
+            <i class="fa-regular fa-heart" aria-hidden="true"></i>
         </a>
-        <a href="cart.html" class="icon-btn">
-            <i class="fa-solid fa-cart-shopping"></i>
+        <a href="cart.html" class="icon-btn" aria-label="Open cart">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
         </a>
     </div>
 </header>
 
-<nav id="sideMenu" class="side-menu">
+<nav id="sideMenu" class="side-menu" aria-label="Main navigation">
+    <a href="index.html">Home</a>
     <a href="gear.html">Gear</a>
     <a href="equipment.html">Equipment</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
 </nav>
 
-<!--PRODUCTS-->
-<div class="equipment-bg">
-    <section class="equipment">
-        <h2>Equipment</h2>
+<!--MAIN-->
+<main id="mainContent">
+    <div class="equipment-bg">
+        <section class="equipment">
+            <h2>Equipment</h2>
+            <p id="searchResultsMessage" class="search-results-message" aria-live="polite"></p>
 
-        <div class="grid">
+            <div class="grid">
 
-            <div class="product"
-                 data-id="13"
-                 data-name="5kg Dumbbells"
-                 data-price="30.00"
-                 data-img="imgs/5kg.jpg"
-                 onclick="openProduct(13)">
-                <div class="product-img">
-                    <img src="imgs/5kg.jpg" alt="5kg Dumbbells">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="13"
+                     data-name="5kg Dumbbells"
+                     data-price="30.00"
+                     data-img="imgs/5kg.jpg"
+                     data-alt="5 kilogram dumbbells"
+                     onclick="openProduct(13)">
+                    <div class="product-img">
+                        <img src="imgs/5kg.jpg" alt="5 kilogram dumbbells">
+                        <button class="fav-icon" type="button" aria-label="Add 5kg Dumbbells to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add 5kg Dumbbells to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>5kg Dumbbells</h3>
+                    <p class="price">$30.00</p>
                 </div>
-                <h3>5kg Dumbbells</h3>
-                <p class="price">$30.00</p>
-            </div>
 
-            <div class="product"
-                 data-id="14"
-                 data-name="10kg Dumbbells"
-                 data-price="49.99"
-                 data-img="imgs/10kg.jpg"
-                 onclick="openProduct(14)">
-                <div class="product-img">
-                    <img src="imgs/10kg.jpg" alt="10kg Dumbbells">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="14"
+                     data-name="10kg Dumbbells"
+                     data-price="49.99"
+                     data-img="imgs/10kg.jpg"
+                     data-alt="10 kilogram dumbbells"
+                     onclick="openProduct(14)">
+                    <div class="product-img">
+                        <img src="imgs/10kg.jpg" alt="10 kilogram dumbbells">
+                        <button class="fav-icon" type="button" aria-label="Add 10kg Dumbbells to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add 10kg Dumbbells to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>10kg Dumbbells</h3>
+                    <p class="price">$49.99</p>
                 </div>
-                <h3>10kg Dumbbells</h3>
-                <p class="price">$49.99</p>
-            </div>
 
-            <div class="product"
-                 data-id="15"
-                 data-name="20kg Dumbbells"
-                 data-price="99.99"
-                 data-img="imgs/20kg.jpg"
-                 onclick="openProduct(15)">
-                <div class="product-img">
-                    <img src="imgs/20kg.jpg" alt="20kg Dumbbells">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="15"
+                     data-name="20kg Dumbbells"
+                     data-price="99.99"
+                     data-img="imgs/20kg.jpg"
+                     data-alt="20 kilogram dumbbells"
+                     onclick="openProduct(15)">
+                    <div class="product-img">
+                        <img src="imgs/20kg.jpg" alt="20 kilogram dumbbells">
+                        <button class="fav-icon" type="button" aria-label="Add 20kg Dumbbells to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add 20kg Dumbbells to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>20kg Dumbbells</h3>
+                    <p class="price">$99.99</p>
                 </div>
-                <h3>20kg Dumbbells</h3>
-                <p class="price">$99.99</p>
-            </div>
 
-            <div class="product"
-                 data-id="16"
-                 data-name="Barbell Bar"
-                 data-price="179.99"
-                 data-img="imgs/barb.jpg"
-                 onclick="openProduct(16)">
-                <div class="product-img">
-                    <img src="imgs/barb.jpg" alt="Barbell Bar">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="16"
+                     data-name="Barbell Bar"
+                     data-price="179.99"
+                     data-img="imgs/barb.jpg"
+                     data-alt="Barbell bar for strength training"
+                     onclick="openProduct(16)">
+                    <div class="product-img">
+                        <img src="imgs/barb.jpg" alt="Barbell bar for strength training">
+                        <button class="fav-icon" type="button" aria-label="Add Barbell Bar to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Barbell Bar to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Barbell Bar</h3>
+                    <p class="price">$179.99</p>
                 </div>
-                <h3>Barbell Bar</h3>
-                <p class="price">$179.99</p>
-            </div>
 
-            <div class="product"
-                 data-id="17"
-                 data-name="12kg Kettlebell"
-                 data-price="40.00"
-                 data-img="imgs/kettle.jpg"
-                 onclick="openProduct(17)">
-                <div class="product-img">
-                    <img src="imgs/kettle.jpg" alt="12kg Kettlebell">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="17"
+                     data-name="12kg Kettlebell"
+                     data-price="40.00"
+                     data-img="imgs/kettle.jpg"
+                     data-alt="12 kilogram kettlebell"
+                     onclick="openProduct(17)">
+                    <div class="product-img">
+                        <img src="imgs/kettle.jpg" alt="12 kilogram kettlebell">
+                        <button class="fav-icon" type="button" aria-label="Add 12kg Kettlebell to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add 12kg Kettlebell to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>12kg Kettlebell</h3>
+                    <p class="price">$40.00</p>
                 </div>
-                <h3>12kg Kettlebell</h3>
-                <p class="price">$40.00</p>
-            </div>
 
-            <div class="product"
-                 data-id="18"
-                 data-name="Multi-Functional Bench"
-                 data-price="50.00"
-                 data-img="imgs/bench.jpg"
-                 onclick="openProduct(18)">
-                <div class="product-img">
-                    <img src="imgs/bench.jpg" alt="Multi-Functional Bench">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="18"
+                     data-name="Multi-Functional Bench"
+                     data-price="50.00"
+                     data-img="imgs/bench.jpg"
+                     data-alt="Multi-functional workout bench"
+                     onclick="openProduct(18)">
+                    <div class="product-img">
+                        <img src="imgs/bench.jpg" alt="Multi-functional workout bench">
+                        <button class="fav-icon" type="button" aria-label="Add Multi-Functional Bench to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Multi-Functional Bench to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Multi-Functional Bench</h3>
+                    <p class="price">$50.00</p>
                 </div>
-                <h3>Multi-Functional Bench</h3>
-                <p class="price">$50.00</p>
-            </div>
 
-        </div>
-    </section>
-</div>
+            </div>
+        </section>
+    </div>
+</main>
 
 <script src="script.js"></script>
 </body>
