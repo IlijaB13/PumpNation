@@ -1,6 +1,7 @@
 /*HOMEPG*/
 body {
     margin: 0;
+    padding: 0;
     margin-top: 60px;
     font-family: "Manrope", Arial, sans-serif;
     overflow-x: hidden;
@@ -888,7 +889,7 @@ h1, h2, h3, .logo {
 @media (max-width: 700px) {
     body,
     .product-page-body {
-        margin-top: 140px;
+        margin-top: 124px;
     }
 
     .topbar {
@@ -897,6 +898,7 @@ h1, h2, h3, .logo {
         align-items: center;
         padding: 10px 12px;
         row-gap: 10px;
+        min-height: 124px;
     }
 
     .left-section {
@@ -938,7 +940,7 @@ h1, h2, h3, .logo {
     }
 
     .side-menu {
-        top: 140px;
+        top: 124px;
     }
 
     .grid {
