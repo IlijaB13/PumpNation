@@ -1,3 +1,4 @@
+/*HOMEPG*/
 body {
     margin: 0;
     margin-top: 60px;
@@ -5,17 +6,14 @@ body {
     overflow-x: hidden;
 }
 
-/* TOP BAR */
 .topbar {
     background-color: #258cfb;
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     height: 60px;
     padding: 0 20px;
-
     position: fixed;
     top: 0;
     left: 0;
@@ -52,25 +50,37 @@ body {
     color: white;
 }
 
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .right-section button {
-    margin-left: 10px;
     background: none;
     border: none;
-    color: white;
-    font-size: 20px;
     cursor: pointer;
 }
 
+.icon-btn {
+    all: unset;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .icon-btn i {
-    color: white;
     font-size: 20px;
+    color: white;
 }
 
 .icon-btn:hover i {
     color: orange;
 }
 
-/* SIDE MENU */
 .side-menu {
     position: fixed;
     left: -200px;
@@ -79,7 +89,7 @@ body {
     width: 200px;
     height: calc(100vh - 60px);
     background: #1365bb;
-    transition: left 0.3;
+    transition: left 0.3s;
     z-index: 999;
 }
 
@@ -98,7 +108,6 @@ body {
     background: orange;
 }
 
-/* SLOGAN */
 .slogan {
     height: 300px;
     background: url('imgs/gymbkg.jpg') center/cover no-repeat;
@@ -110,23 +119,20 @@ body {
     font-weight: bold;
 }
 
-/* DEALS */
 .deals {
     padding: 20px;
     text-align: center;
 }
 
-/* CAROUSEL CONTAINER */
 .carousel-container {
     position: relative;
     display: flex;
     align-items: center;
     overflow: visible;
-    max-width: 900px;  
-    margin: 0 auto;    
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-/* PRODUCT ROW */
 .products {
     display: flex;
     gap: 20px;
@@ -135,17 +141,20 @@ body {
     width: 100%;
 }
 
-/* PRODUCT CARD */
 .product {
     min-width: calc(25% - 15px);
     background: white;
     border-radius: 10px;
     padding: 10px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
-/* IMAGE */
+.product-img {
+    position: relative;
+}
+
 .product img {
     width: 100%;
     height: 120px;
@@ -153,7 +162,37 @@ body {
     border-radius: 8px;
 }
 
-/* PRICE */
+.fav-icon,
+.cart-icon {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    padding: 8px;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.fav-icon {
+    top: 10px;
+    right: 10px;
+    color: black;
+}
+
+.cart-icon {
+    bottom: 10px;
+    right: 10px;
+    color: black;
+}
+
+.fav-icon:hover {
+    color: red;
+}
+
+.cart-icon:hover {
+    color: #258cfb;
+}
+
 .price {
     margin-top: 10px;
     font-weight: bold;
@@ -165,7 +204,6 @@ body {
     margin-right: 5px;
 }
 
-/* ARROWS */
 .arrow {
     background: #258cfb;
     color: white;
@@ -178,6 +216,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 5;
 }
 
 .arrow.left {
@@ -192,26 +231,20 @@ body {
     background: #1365bb;
 }
 
-.old-price {
-    text-decoration: line-through;
-    color: red;
-}
-
+/*GEAR&EQUIPMENT*/
 .equipment-bg {
-    background: url('imgs/gymbkg.jpg') center/cover no-repeat;
     min-height: 100vh;
     position: relative;
+    background: url("imgs/gymbkg.jpg") center/cover no-repeat;
 }
 
-/* DARK OVERLAY */
 .equipment-bg::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
 }
 
-/* keep content above overlay */
 .equipment {
     position: relative;
     color: white;
@@ -232,6 +265,11 @@ body {
     border-radius: 10px;
     text-align: center;
     position: relative;
+    cursor: pointer;
+}
+
+.product-img {
+    position: relative;
 }
 
 .product img {
@@ -241,12 +279,6 @@ body {
     border-radius: 8px;
 }
 
-/* IMAGE WRAPPER */
-.product-img {
-    position: relative;
-}
-
-/* ICON BASE */
 .fav-icon,
 .cart-icon {
     position: absolute;
@@ -258,38 +290,261 @@ body {
     transition: 0.3s;
 }
 
-/* HEART (top right) */
 .fav-icon {
     top: 10px;
     right: 10px;
     color: white;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
 }
 
-/* CART (bottom right) */
 .cart-icon {
     bottom: 10px;
     right: 10px;
     color: white;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
 }
 
-/* SHOW ON HOVER */
 .product:hover .fav-icon,
 .product:hover .cart-icon {
     opacity: 1;
 }
 
-/* ACTIVE STATES */
-.fav-icon.active {
-    color: red;
+.fav-icon.fa-solid {
+    opacity: 1;
+    color: red !important;
 }
 
-.cart-icon.active {
+.cart-icon.active-cart {
+    opacity: 1;
+    background: #258cfb;
+    color: white !important;
+}
+
+/*PRODUCT PG*/
+.product-page-body {
+    background: url("imgs/gymbkg.jpg") center/cover no-repeat fixed;
+    margin: 0;
+    margin-top: 60px;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+/*overlay*/
+.product-page-body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -1;
+}
+
+.product-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+    padding: 40px;
+}
+
+.product-box {
+    background: white;
+    display: flex;
+    gap: 40px;
+    padding: 30px;
+    border-radius: 15px;
+    width: 900px;
+    max-width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.left-side {
+    flex: 1;
+    text-align: center;
+}
+
+.left-side h1 {
+    margin-bottom: 15px;
+    color: black;
+}
+
+.left-side img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.left-side .price {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.desc-box {
+    background: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+    line-height: 1.6;
+}
+
+.size-container {
+    margin-top: 15px;
+    color: black;
+}
+
+.size-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.size-container select {
+    margin-top: 5px;
+    padding: 8px;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.add-cart {
     background: #258cfb;
     color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
-/* BACKGROUND */
+
+.add-cart:hover {
+    background: #1f6ed4;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: red;
+    margin-right: 8px;
+}
+
+/*FAVOURITES PG*/
+.favorites-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    min-height: calc(100vh - 60px);
+}
+
+.favorites-title {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.favorites-box {
+    background: white;
+    width: 800px;
+    max-width: 100%;
+    border-radius: 12px;
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.favorites-box p {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+.fav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.fav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.fav-left img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.fav-info {
+    display: flex;
+    flex-direction: column;
+    color: black;
+}
+
+.fav-info h3 {
+    margin: 0 0 5px 0;
+}
+
+.fav-info .price {
+    color: #666;
+    font-size: 14px;
+}
+
+.fav-info .size {
+    font-size: 12px;
+    color: #999;
+}
+
+.fav-check {
+    width: 20px;
+    height: 20px;
+    accent-color: #258cfb;
+    margin-right: 10px;
+}
+
+.fav-check:checked {
+    background-color: #258cfb;
+}
+
+.add-cart-fav {
+    margin-top: 20px;
+    background: #258cfb;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-cart-fav:hover {
+    background: #1f6ed4;
+}
+
+.add-cart-fav:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/*ABOUT PG*/
 .about-bg {
     background: url('imgs/gymbkg.jpg') center/cover no-repeat;
     min-height: 100vh;
@@ -303,7 +558,6 @@ body {
     background: rgba(0,0,0,0.7);
 }
 
-/* CONTENT */
 .about {
     position: relative;
     color: white;
@@ -313,7 +567,6 @@ body {
     text-align: center;
 }
 
-/* HEADINGS */
 .about h1 {
     font-size: 40px;
     margin-bottom: 10px;
@@ -325,13 +578,11 @@ body {
     margin-bottom: 20px;
 }
 
-/* TEXT */
 .about p {
     margin-bottom: 15px;
     line-height: 1.6;
 }
 
-/* LIST */
 .about ul {
     list-style: none;
     padding: 0;
@@ -342,7 +593,7 @@ body {
     font-size: 18px;
 }
 
-/* BACKGROUND */
+/*CONTACT PG*/
 .contact-bg {
     background: url('imgs/gymbkg.jpg') center/cover no-repeat;
     min-height: 100vh;
@@ -356,18 +607,19 @@ body {
     background: rgba(0,0,0,0.7);
 }
 
-/* LAYOUT */
 .contact-container {
     position: relative;
     display: flex;
-    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
     color: white;
 }
 
-/* LEFT SIDE */
 .contact-left {
     flex: 1;
     padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .contact-left h1 {
@@ -395,8 +647,8 @@ body {
 .contact-right {
     flex: 1;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     padding: 20px;
 }
 
@@ -407,100 +659,210 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-/* BACKGROUND (same as homepage but dimmed) */
-.product-page-body {
-    background: url("imgs/gymbkg.jpg") center/cover no-repeat fixed;
-}
-
-/* CENTER EVERYTHING */
-.product-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+/*CART PG*/
+.cart-wrapper {
     padding: 40px;
-}
-
-/* MAIN WHITE BOX */
-.product-box {
-    background: white;
-    display: flex;
-    gap: 40px;
-    padding: 30px;
-    border-radius: 15px;
-    width: 900px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-/* LEFT SIDE */
-.left-side {
-    flex: 1;
+    color: white;
     text-align: center;
 }
 
-.left-side h1 {
-    margin-bottom: 15px;
+.cart-title {
+    margin-bottom: 20px;
 }
 
-.left-side img {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 10px;
-}
-
-.left-side .price {
-    margin-top: 15px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-/* RIGHT SIDE */
-.right-side {
-    flex: 1;
+.cart-layout {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    align-items: flex-start;
 }
 
-/* DESCRIPTION BOX */
-.desc-box {
-    background: #f1f1f1;
+.cart-box {
+    background: white;
+    width: 600px;
+    border-radius: 12px;
     padding: 20px;
-    border-radius: 10px;
     color: black;
 }
 
-/* ADD TO CART BUTTON */
-.add-cart {
-    background: #258cfb;
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+    flex: 1;
+}
+
+.cart-left img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cart-info h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.cart-info p {
+    margin: 0;
+    color: #666;
+}
+
+.cart-price {
+    font-weight: bold;
+    color: black;
+    min-width: 80px;
+    text-align: right;
+}
+
+.remove-btn {
+    background: rgb(255, 149, 0);
     color: white;
     border: none;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 8px;
+    padding: 6px 10px;
+    border-radius: 6px;
     cursor: pointer;
-    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1;
+}
 
+.remove-btn:hover {
+    background: rgb(174, 90, 0);
+}
+
+.fav-right {
     display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 15px;
+}
+
+.item-price {
+    font-weight: bold;
+    color: black;
+}
+
+.checkout-box {
+    background: white;
+    width: 300px;
+    border-radius: 12px;
+    padding: 20px;
+    color: black;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
-/* HOVER EFFECT */
-.add-cart:hover {
+.checkout-box input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.buy-btn {
+    margin-top: 10px;
+    background: #258cfb;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.buy-btn:hover {
     background: #1f6ed4;
 }
 
-.size-container {
-    margin-top: 15px;
-    color: black;
+.empty-message {
+    color: #666;
+    font-style: italic;
 }
 
-.size-container select {
-    margin-top: 5px;
-    padding: 8px;
+/*POPUP*/
+.custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.custom-modal.show {
+    display: flex;
+}
+
+.custom-modal-content {
+    background: white;
+    color: black;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 400px;
     width: 100%;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-btn {
+    margin-top: 15px;
+    background: #258cfb;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.modal-btn:hover {
+    background: #1f6ed4;
+}
+
+.toast-message {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #258cfb;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 10001;
+    font-weight: bold;
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateY(0);
 }
