@@ -889,7 +889,7 @@ h1, h2, h3, .logo {
 @media (max-width: 700px) {
     body,
     .product-page-body {
-        margin-top: 124px;
+        margin-top: 140px;
     }
 
     .topbar {
@@ -940,7 +940,7 @@ h1, h2, h3, .logo {
     }
 
     .side-menu {
-        top: 124px;
+        top: 140px;
     }
 
     .grid {
