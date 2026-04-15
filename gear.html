@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gear-PumpNation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -11,131 +15,174 @@
 <!--BAR&MENU-->
 <header class="topbar">
     <div class="left-section">
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <input type="text" placeholder="Search..." class="search-bar">
+        <button class="menu-icon" onclick="toggleMenu()" aria-label="Open menu" aria-controls="sideMenu" aria-expanded="false" type="button">☰</button>
+
+        <div class="search-wrap">
+            <label for="globalSearch" class="sr-only">Search products</label>
+            <input
+                type="text"
+                id="globalSearch"
+                placeholder="Search..."
+                class="search-bar"
+                onkeydown="handleSearchKey(event)"
+                oninput="handleLiveSearch(event)"
+            >
+        </div>
     </div>
 
-    <a href="index.html" class="logo">
-        Pump Nation
-    </a>
+    <a href="index.html" class="logo">Pump Nation</a>
 
     <div class="right-section">
-        <a href="favourites.html" class="icon-btn">
-            <i class="fa-regular fa-heart"></i>
+        <a href="favourites.html" class="icon-btn" aria-label="Open favourites">
+            <i class="fa-regular fa-heart" aria-hidden="true"></i>
         </a>
-        <a href="cart.html" class="icon-btn">
-            <i class="fa-solid fa-cart-shopping"></i>
+        <a href="cart.html" class="icon-btn" aria-label="Open cart">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
         </a>
     </div>
 </header>
 
-<nav id="sideMenu" class="side-menu">
+<nav id="sideMenu" class="side-menu" aria-label="Main navigation">
+    <a href="index.html">Home</a>
     <a href="gear.html">Gear</a>
     <a href="equipment.html">Equipment</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
 </nav>
 
-<!--PRODUCTS-->
-<div class="equipment-bg">
-    <section class="equipment">
-        <h2>Gear</h2>
+<!--MAIN-->
+<main id="mainContent">
+    <div class="equipment-bg">
+        <section class="equipment">
+            <h2>Gear</h2>
+            <p id="searchResultsMessage" class="search-results-message" aria-live="polite"></p>
 
-        <div class="grid">
+            <div class="grid">
 
-            <div class="product"
-                 data-id="7"
-                 data-name="Windbreaker"
-                 data-price="69.99"
-                 data-img="imgs/jacket.jpg"
-                 onclick="openProduct(7)">
-                <div class="product-img">
-                    <img src="imgs/jacket.jpg" alt="Windbreaker">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="7"
+                     data-name="Windbreaker"
+                     data-price="69.99"
+                     data-img="imgs/jacket.jpg"
+                     data-alt="Windbreaker jacket for outdoor workouts"
+                     onclick="openProduct(7)">
+                    <div class="product-img">
+                        <img src="imgs/jacket.jpg" alt="Windbreaker jacket for outdoor workouts">
+                        <button class="fav-icon" type="button" aria-label="Add Windbreaker to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Windbreaker to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Windbreaker</h3>
+                    <p class="price">$69.99</p>
                 </div>
-                <h3>Windbreaker</h3>
-                <p class="price">$69.99</p>
-            </div>
 
-            <div class="product"
-                 data-id="8"
-                 data-name="Women's Leggings"
-                 data-price="19.99"
-                 data-img="imgs/leg.jpg"
-                 onclick="openProduct(8)">
-                <div class="product-img">
-                    <img src="imgs/leg.jpg" alt="Women's Leggings">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="8"
+                     data-name="Women's Leggings"
+                     data-price="19.99"
+                     data-img="imgs/leg.jpg"
+                     data-alt="Women's leggings for training and exercise"
+                     onclick="openProduct(8)">
+                    <div class="product-img">
+                        <img src="imgs/leg.jpg" alt="Women's leggings for training and exercise">
+                        <button class="fav-icon" type="button" aria-label="Add Women's Leggings to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Women's Leggings to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Women's Leggings</h3>
+                    <p class="price">$19.99</p>
                 </div>
-                <h3>Women's Leggings</h3>
-                <p class="price">$19.99</p>
-            </div>
 
-            <div class="product"
-                 data-id="9"
-                 data-name="T-Shirt"
-                 data-price="25.00"
-                 data-img="imgs/shirt.jpg"
-                 onclick="openProduct(9)">
-                <div class="product-img">
-                    <img src="imgs/shirt.jpg" alt="T-Shirt">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="9"
+                     data-name="T-Shirt"
+                     data-price="25.00"
+                     data-img="imgs/shirt.jpg"
+                     data-alt="Athletic t-shirt for workouts"
+                     onclick="openProduct(9)">
+                    <div class="product-img">
+                        <img src="imgs/shirt.jpg" alt="Athletic t-shirt for workouts">
+                        <button class="fav-icon" type="button" aria-label="Add T-Shirt to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add T-Shirt to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>T-Shirt</h3>
+                    <p class="price">$25.00</p>
                 </div>
-                <h3>T-Shirt</h3>
-                <p class="price">$25.00</p>
-            </div>
 
-            <div class="product"
-                 data-id="10"
-                 data-name="Running Shoes"
-                 data-price="129.99"
-                 data-img="imgs/shoe.jpg"
-                 onclick="openProduct(10)">
-                <div class="product-img">
-                    <img src="imgs/shoe.jpg" alt="Running Shoes">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="10"
+                     data-name="Running Shoes"
+                     data-price="129.99"
+                     data-img="imgs/shoe.jpg"
+                     data-alt="Running shoes for training and everyday workouts"
+                     onclick="openProduct(10)">
+                    <div class="product-img">
+                        <img src="imgs/shoe.jpg" alt="Running shoes for training and everyday workouts">
+                        <button class="fav-icon" type="button" aria-label="Add Running Shoes to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Running Shoes to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Running Shoes</h3>
+                    <p class="price">$129.99</p>
                 </div>
-                <h3>Running Shoes</h3>
-                <p class="price">$129.99</p>
-            </div>
 
-            <div class="product"
-                 data-id="11"
-                 data-name="Running Shoes (Pro)"
-                 data-price="115.00"
-                 data-img="imgs/shoe2.jpg"
-                 onclick="openProduct(11)">
-                <div class="product-img">
-                    <img src="imgs/shoe2.jpg" alt="Running Shoes (Pro)">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="11"
+                     data-name="Running Shoes (Pro)"
+                     data-price="115.00"
+                     data-img="imgs/shoe2.jpg"
+                     data-alt="Premium running shoes"
+                     onclick="openProduct(11)">
+                    <div class="product-img">
+                        <img src="imgs/shoe2.jpg" alt="Premium running shoes">
+                        <button class="fav-icon" type="button" aria-label="Add Running Shoes Pro to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Running Shoes Pro to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Running Shoes (Pro)</h3>
+                    <p class="price">$115.00</p>
                 </div>
-                <h3>Running Shoes (Pro)</h3>
-                <p class="price">$115.00</p>
-            </div>
 
-            <div class="product"
-                 data-id="12"
-                 data-name="Women's Tank Top"
-                 data-price="15.00"
-                 data-img="imgs/tank.jpg"
-                 onclick="openProduct(12)">
-                <div class="product-img">
-                    <img src="imgs/tank.jpg" alt="Women's Tank Top">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <div class="product"
+                     data-id="12"
+                     data-name="Women's Tank Top"
+                     data-price="15.00"
+                     data-img="imgs/tank.jpg"
+                     data-alt="Women's tank top for workouts"
+                     onclick="openProduct(12)">
+                    <div class="product-img">
+                        <img src="imgs/tank.jpg" alt="Women's tank top for workouts">
+                        <button class="fav-icon" type="button" aria-label="Add Women's Tank Top to favourites">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <button class="cart-icon" type="button" aria-label="Add Women's Tank Top to cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <h3>Women's Tank Top</h3>
+                    <p class="price">$15.00</p>
                 </div>
-                <h3>Women's Tank Top</h3>
-                <p class="price">$15.00</p>
-            </div>
 
-        </div>
-    </section>
-</div>
+            </div>
+        </section>
+    </div>
+</main>
 
 <script src="script.js"></script>
 </body>
